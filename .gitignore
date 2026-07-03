@@ -1,0 +1,5 @@
+# Lokalne ustawienia Claude Code
+.claude/settings.local.json
+
+# System
+.DS_Store
