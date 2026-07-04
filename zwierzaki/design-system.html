@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zwierzaki — Design System</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* — chrome katalogu (tylko na tej stronie, nie część DS) — */
+.ds-shell{max-width:1080px;margin:0 auto;padding:0 32px 100px;}
+.ds-hero{padding:56px 0 40px;border-bottom:1px solid var(--line);margin-bottom:8px;}
+.ds-hero h1{font-size:46px;font-weight:800;}
+.ds-hero p{color:var(--ink-soft);font-size:18px;font-weight:600;max-width:600px;margin:12px 0 0;}
+.ds-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.ds-toc a{font-family:var(--font-display);font-weight:600;font-size:13.5px;padding:7px 14px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);}
+.ds-toc a:hover{border-color:var(--clay);color:var(--clay-deep);}
+.ds-sec{padding:44px 0;border-bottom:1px solid var(--line);}
+.ds-sec > h2{font-size:30px;font-weight:800;display:flex;align-items:center;gap:12px;}
+.ds-sec > h2 .n{font-family:var(--font-display);font-size:14px;font-weight:700;color:#fff;background:var(--clay);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ds-sub{font-family:var(--font-display);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-faint);margin:32px 0 16px;}
+.ds-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;}
+.ds-grid{display:grid;gap:16px;}
+.ds-note{font-size:13.5px;color:var(--ink-soft);font-weight:600;background:var(--clay-tint);border-radius:var(--r-md);padding:14px 18px;margin-top:20px;}
+.ds-note code{font-family:ui-monospace,Menlo,monospace;background:rgba(56,41,28,.1);padding:1px 6px;border-radius:5px;font-size:12.5px;}
+/* swatch */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+.sw{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface);}
+.sw .chip{height:78px;}
+.sw .meta{padding:10px 12px;}
+.sw .meta .nm{font-family:var(--font-display);font-weight:700;font-size:13.5px;}
+.sw .meta .vr{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-soft);}
+.sw .meta .hx{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-faint);}
+/* spec box */
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;display:flex;flex-direction:column;gap:6px;}
+.spec .demo{display:flex;align-items:center;justify-content:center;min-height:60px;}
+.spec .cap{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-soft);text-align:center;}
+/* type spec */
+.type-spec{border-bottom:1px dashed var(--line);padding:14px 0;display:flex;align-items:baseline;justify-content:space-between;gap:20px;}
+.type-spec .cap{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-faint);white-space:nowrap;}
+/* component frame */
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;position:relative;}
+.frame.on-cream{background:var(--cream-deep);}
+.frame .flabel{position:absolute;top:10px;right:12px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-faint);}
+/* icon grid */
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;}
+.icon-cell{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
+.icon-cell .ic{width:28px;height:28px;color:var(--ink);stroke-width:2;}
+.icon-cell .nm{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-soft);}
+.icon-cell .use{font-family:var(--font-display);font-weight:600;font-size:12px;color:var(--ink-faint);}
+.icon-cell.accent{background:var(--clay-tint);}
+.icon-cell.accent .ic{color:var(--clay-deep);}
+.icon-cell.dark{background:var(--pine-deep);border-color:transparent;}
+.icon-cell.dark .ic{color:#fff;}
+.icon-cell.dark .nm,.icon-cell.dark .use{color:rgba(255,255,255,.7);}
+</style>
+</head>
+<body>
+<script src="icons.js"></script>
+<nav class="site">
+  <div class="wrap">
+    <a href="index.html" class="logo">
+      <svg class="paw" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1 1.9-2.3S5.5 5.6 4.5 5.6s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3zm5.6-1.4c1 0 1.9-1.1 1.9-2.4S11.1 4 10.1 4 8.2 5.1 8.2 6.4s.9 2.4 1.9 2.4zm7.9-2.4c0-1.3-.9-2.4-1.9-2.4s-1.9 1.1-1.9 2.4 .9 2.4 1.9 2.4 1.9-1.1 1.9-2.4zm2.6 5.2c0-1.3-.9-2.3-1.9-2.3s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3 1.9-1 1.9-2.3zM12 12.4c-2.6 0-6.4 2.7-6.4 5.4 0 1.3 1 2.2 2.3 2.2.9 0 1.5-.4 2.4-.4.7 0 1.3.4 1.7.4s1-.4 1.7-.4c.9 0 1.5.4 2.4.4 1.3 0 2.3-.9 2.3-2.2 0-2.7-3.8-5.4-6.4-5.4z"/></svg>
+      Zwierzaki
+    </a>
+    <div class="navlinks">
+      <a href="index.html">Podgląd stron</a>
+      <a href="design-system.html" aria-current="page">Design System</a>
+    </div>
+    <span class="badge">v1.0 · Koncept D</span>
+  </div>
+</nav>
+
+<div class="ds-shell">
+  <header class="ds-hero">
+    <span class="eyebrow">Dokumentacja dla dev + design</span>
+    <h1>Design System „Zwierzaki"</h1>
+    <p>Jedno źródło prawdy: tokeny, typografia i komponenty od atomów po organizmy. Wszystko żywe — dokładnie te same klasy, których używają podstrony (<code style="font-family:ui-monospace,monospace;font-size:14px">styles.css</code>). Ten sam system posłuży do odbudowy 1:1 w Figmie.</p>
+    <nav class="ds-toc">
+      <a href="#kolory">Kolory</a>
+      <a href="#typografia">Typografia</a>
+      <a href="#promienie">Promienie i cienie</a>
+      <a href="#spacing">Odstępy</a>
+      <a href="#ikony">Ikony</a>
+      <a href="#atomy">Atomy</a>
+      <a href="#molekuly">Molekuły</a>
+      <a href="#organizmy">Organizmy</a>
+      <a href="#aura">Aura</a>
+    </nav>
+  </header>
+
+  <!-- KOLORY -->
+  <section class="ds-sec" id="kolory">
+    <h2><span class="n">A</span> Kolory</h2>
+    <div class="ds-sub">Tła i powierzchnie</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--cream)"></div><div class="meta"><div class="nm">Pergamin</div><div class="vr">--cream</div><div class="hx">#FBF5EC</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--cream-deep)"></div><div class="meta"><div class="nm">Pergamin głęboki</div><div class="vr">--cream-deep</div><div class="hx">#F3EADB</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface);border-bottom:1px solid var(--line)"></div><div class="meta"><div class="nm">Powierzchnia</div><div class="vr">--surface</div><div class="hx">#FFFFFF</div></div></div>
+    </div>
+    <div class="ds-sub">Atrament / tekst</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><div class="nm">Atrament</div><div class="vr">--ink</div><div class="hx">#38291C</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-soft)"></div><div class="meta"><div class="nm">Atrament miękki</div><div class="vr">--ink-soft</div><div class="hx">#77685A</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-faint)"></div><div class="meta"><div class="nm">Atrament ledwy</div><div class="vr">--ink-faint</div><div class="hx">#AC9C8B</div></div></div>
+    </div>
+    <div class="ds-sub">Akcent 1 — glina (CTA)</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--clay)"></div><div class="meta"><div class="nm">Glina</div><div class="vr">--clay</div><div class="hx">#CE6B47</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--clay-deep)"></div><div class="meta"><div class="nm">Glina głęboka</div><div class="vr">--clay-deep</div><div class="hx">#B4562F</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--clay-tint)"></div><div class="meta"><div class="nm">Glina jasna</div><div class="vr">--clay-tint</div><div class="hx">#F6E5DB</div></div></div>
+    </div>
+    <div class="ds-sub">Akcent 2 — zieleń (zaufanie)</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--pine)"></div><div class="meta"><div class="nm">Zieleń</div><div class="vr">--pine</div><div class="hx">#2E645A</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--pine-deep)"></div><div class="meta"><div class="nm">Zieleń głęboka</div><div class="vr">--pine-deep</div><div class="hx">#234C44</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--pine-tint)"></div><div class="meta"><div class="nm">Zieleń jasna</div><div class="vr">--pine-tint</div><div class="hx">#E4EDEA</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--sand)"></div><div class="meta"><div class="nm">Piasek (aura)</div><div class="vr">--sand</div><div class="hx">#E2B482</div></div></div>
+    </div>
+    <div class="ds-note">Reguła: <b>glina</b> = akcja/CTA i podświetlenia, <b>zieleń</b> = zaufanie, powaga, sekcje dowodowe. Maksymalnie dwa akcenty na widok — to celowa dyscyplina z Konceptu D.</div>
+  </section>
+
+  <!-- TYPOGRAFIA -->
+  <section class="ds-sec" id="typografia">
+    <h2><span class="n">B</span> Typografia</h2>
+    <div class="ds-sub">Baloo 2 — nagłówki, etykiety (<code style="font-family:ui-monospace,monospace">--font-display</code>)</div>
+    <div class="type-spec"><h1 style="font-size:60px">Poznaj psa</h1><span class="cap">H1 · 60/800</span></div>
+    <div class="type-spec"><h2 style="font-size:40px">Model z rozmów</h2><span class="cap">H2 · 40/800</span></div>
+    <div class="type-spec"><h3 style="font-size:25px">Border collie</h3><span class="cap">H3 · 25/700</span></div>
+    <div class="type-spec"><h4 style="font-size:17px">Nagłówek karty</h4><span class="cap">H4 · 17/700</span></div>
+    <div class="type-spec"><span class="eyebrow">Eyebrow / etykieta</span><span class="cap">eyebrow · 13.5/700</span></div>
+    <div class="ds-sub">Nunito — tekst (<code style="font-family:ui-monospace,monospace">--font-body</code>)</div>
+    <div class="type-spec"><p style="margin:0;max-width:560px">Odpowiedz na kilka pytań o swoim stylu życia, a my dopasujemy rasę psa, z którą będziecie szczęśliwi — Ty i on.</p><span class="cap">body · 15–19/500–600</span></div>
+    <div class="ds-note">Odwrotność typowego układu: zaokrąglona, przyjazna <b>Baloo 2</b> w nagłówkach + czytelna, ciepła <b>Nunito</b> w tekście. Waga tekstu bazowo 500–600 (Nunito jest „chudsze" optycznie).</div>
+  </section>
+
+  <!-- PROMIENIE I CIENIE -->
+  <section class="ds-sec" id="promienie">
+    <h2><span class="n">C</span> Promienie i cienie</h2>
+    <div class="ds-sub">Promienie</div>
+    <div class="ds-row">
+      <div class="spec" style="width:150px"><div class="demo"><div style="width:70px;height:50px;background:var(--clay-tint);border-radius:var(--r-xl)"></div></div><div class="cap">--r-xl · 32px</div></div>
+      <div class="spec" style="width:150px"><div class="demo"><div style="width:70px;height:50px;background:var(--clay-tint);border-radius:var(--r-lg)"></div></div><div class="cap">--r-lg · 24px</div></div>
+      <div class="spec" style="width:150px"><div class="demo"><div style="width:70px;height:50px;background:var(--clay-tint);border-radius:var(--r-md)"></div></div><div class="cap">--r-md · 16px</div></div>
+      <div class="spec" style="width:150px"><div class="demo"><div style="width:70px;height:50px;background:var(--clay-tint);border-radius:var(--r-sm)"></div></div><div class="cap">--r-sm · 10px</div></div>
+      <div class="spec" style="width:150px"><div class="demo"><div style="width:70px;height:50px;background:var(--clay-tint);border-radius:var(--r-pill)"></div></div><div class="cap">--r-pill · 100px</div></div>
+    </div>
+    <div class="ds-sub">Cienie</div>
+    <div class="ds-row">
+      <div class="spec" style="width:210px;background:var(--cream)"><div class="demo"><div style="width:120px;height:60px;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow-sm)"></div></div><div class="cap">--shadow-sm</div></div>
+      <div class="spec" style="width:210px;background:var(--cream)"><div class="demo"><div style="width:120px;height:60px;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow)"></div></div><div class="cap">--shadow</div></div>
+      <div class="spec" style="width:210px;background:var(--cream)"><div class="demo"><div style="width:120px;height:60px;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow-lg)"></div></div><div class="cap">--shadow-lg</div></div>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section class="ds-sec" id="spacing">
+    <h2><span class="n">D</span> Odstępy — skala 4px</h2>
+    <div class="ds-grid" style="grid-template-columns:1fr">
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:4px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-1 · 4px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:8px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-2 · 8px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:16px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-4 · 16px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:24px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-5 · 24px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:32px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-6 · 32px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:48px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-7 · 48px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:64px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-8 · 64px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:88px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">--sp-9 · 88px</span></div>
+    </div>
+  </section>
+
+  <!-- IKONY -->
+  <section class="ds-sec" id="ikony">
+    <h2><span class="n">E</span> Ikony</h2>
+    <p style="color:var(--ink-soft);font-weight:600;max-width:660px">Autorski set — jeden język: kontur 24px, stała gruba kreska z zaokrąglonymi końcami, w duchu miękkiej łapki z logo. Wszystkie na <code style="font-family:ui-monospace,monospace">currentColor</code>, więc przejmują kolor kontekstu. Łapka jest wypełniona (znak marki, klasa <code style="font-family:ui-monospace,monospace">solid</code>).</p>
+    <div class="ds-sub">Zestaw pełny</div>
+    <div class="icon-grid">
+      <div class="icon-cell accent"><svg class="ic solid"><use href="#ic-paw"/></svg><span class="nm">ic-paw</span><span class="use">marka</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bolt"/></svg><span class="nm">ic-bolt</span><span class="use">aktywność</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-home"/></svg><span class="nm">ic-home</span><span class="use">dom / ogród</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-building"/></svg><span class="nm">ic-building</span><span class="use">mieszkanie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-cap"/></svg><span class="nm">ic-cap</span><span class="use">doświadczenie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-target"/></svg><span class="nm">ic-target</span><span class="use">dopasowanie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-compass"/></svg><span class="nm">ic-compass</span><span class="use">uzasadnienie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-chart"/></svg><span class="nm">ic-chart</span><span class="use">statystyki</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-refresh"/></svg><span class="nm">ic-refresh</span><span class="use">alternatywy</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-shield"/></svg><span class="nm">ic-shield</span><span class="use">szczepienia</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bulb"/></svg><span class="nm">ic-bulb</span><span class="use">behawiorysta</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-suitcase"/></svg><span class="nm">ic-suitcase</span><span class="use">pet sitter</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-vet"/></svg><span class="nm">ic-vet</span><span class="use">weterynarz</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-pin"/></svg><span class="nm">ic-pin</span><span class="use">lokalizacja</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bone"/></svg><span class="nm">ic-bone</span><span class="use">rasa</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-verified"/></svg><span class="nm">ic-verified</span><span class="use">zweryfikowano</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-check"/></svg><span class="nm">ic-check</span><span class="use">potwierdzenie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-lock"/></svg><span class="nm">ic-lock</span><span class="use">prywatność</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-star"/></svg><span class="nm">ic-star</span><span class="use">ocena</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-heart"/></svg><span class="nm">ic-heart</span><span class="use">rodzina</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-clock"/></svg><span class="nm">ic-clock</span><span class="use">czas</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-download"/></svg><span class="nm">ic-download</span><span class="use">zapisz</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-share"/></svg><span class="nm">ic-share</span><span class="use">udostępnij</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-leaf"/></svg><span class="nm">ic-leaf</span><span class="use">niska energia</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-mountain"/></svg><span class="nm">ic-mountain</span><span class="use">wysoka energia</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-arrow"/></svg><span class="nm">ic-arrow</span><span class="use">CTA</span></div>
+    </div>
+    <div class="ds-sub">Kolor przejmowany z kontekstu</div>
+    <div class="icon-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="icon-cell"><svg class="ic"><use href="#ic-target"/></svg><span class="use">atrament</span></div>
+      <div class="icon-cell accent"><svg class="ic"><use href="#ic-target"/></svg><span class="use">glina</span></div>
+      <div class="icon-cell" style="background:var(--pine-tint)"><svg class="ic" style="color:var(--pine)"><use href="#ic-target"/></svg><span class="use">zieleń</span></div>
+      <div class="icon-cell dark"><svg class="ic"><use href="#ic-target"/></svg><span class="use">na ciemnym</span></div>
+    </div>
+    <div class="ds-note">Użycie: <code>&lt;svg class="ic"&gt;&lt;use href="#ic-home"/&gt;&lt;/svg&gt;</code>. Rozmiar skaluje się z <code>font-size</code> rodzica (1.15em), więc ikona „siada" w tekście. Łapka: <code>class="ic solid"</code>.</div>
+  </section>
+
+  <!-- ATOMY -->
+  <section class="ds-sec" id="atomy">
+    <h2><span class="n">F</span> Atomy</h2>
+
+    <div class="ds-sub">Przyciski</div>
+    <div class="frame"><div class="ds-row">
+      <a class="btn btn-primary">Primary</a>
+      <a class="btn btn-pine">Pine</a>
+      <a class="btn btn-soft">Soft</a>
+      <a class="btn btn-outline">Outline</a>
+      <a class="btn btn-primary btn-sm">Small</a>
+      <a class="btn btn-primary btn-lg">Large</a>
+    </div></div>
+
+    <div class="ds-sub">Etykiety i plakietki</div>
+    <div class="frame"><div class="ds-row" style="align-items:center">
+      <span class="eyebrow">Eyebrow</span>
+      <span class="sticker"><svg class="ic solid"><use href="#ic-paw"/></svg> Sticker</span>
+      <span class="badge">Badge</span>
+      <span class="match-badge"><svg class="ic solid"><use href="#ic-paw"/></svg> Dopasowanie 92%</span>
+      <span class="stars">★★★★★</span>
+    </div></div>
+
+    <div class="ds-sub">Pill / tag / filtr</div>
+    <div class="frame"><div class="ds-row" style="align-items:center">
+      <span class="pill"><b>92%</b> styl życia</span>
+      <span class="tag">Wybór rasy</span>
+      <span class="filter-pill">Wszystkie</span>
+      <span class="filter-pill active">border collie</span>
+    </div></div>
+
+    <div class="ds-sub">Kółko procentowe · avatar · logo</div>
+    <div class="frame"><div class="ds-row" style="align-items:center">
+      <div class="pct-circle">92%</div>
+      <div class="pct-circle sm">84%</div>
+      <div class="avatar"></div>
+      <div class="avatar pine"></div>
+      <span class="logo"><svg class="paw" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1 1.9-2.3S5.5 5.6 4.5 5.6s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3zm5.6-1.4c1 0 1.9-1.1 1.9-2.4S11.1 4 10.1 4 8.2 5.1 8.2 6.4s.9 2.4 1.9 2.4zm7.9-2.4c0-1.3-.9-2.4-1.9-2.4s-1.9 1.1-1.9 2.4 .9 2.4 1.9 2.4 1.9-1.1 1.9-2.4zm2.6 5.2c0-1.3-.9-2.3-1.9-2.3s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3 1.9-1 1.9-2.3zM12 12.4c-2.6 0-6.4 2.7-6.4 5.4 0 1.3 1 2.2 2.3 2.2.9 0 1.5-.4 2.4-.4.7 0 1.3.4 1.7.4s1-.4 1.7-.4c.9 0 1.5.4 2.4.4 1.3 0 2.3-.9 2.3-2.2 0-2.7-3.8-5.4-6.4-5.4z"/></svg>Zwierzaki</span>
+    </div></div>
+
+    <div class="ds-sub">Pola formularza</div>
+    <div class="frame" style="max-width:420px">
+      <label class="label" for="ex1">Adres e-mail</label>
+      <input class="input" id="ex1" type="email" placeholder="np. anna@example.com">
+    </div>
+
+    <div class="ds-sub">Breadcrumb</div>
+    <div class="frame"><nav class="breadcrumb"><a href="#">Strona główna</a><span>/</span><a href="#">Hodowcy</a><span>/</span>Hodowla Border Meadow</nav></div>
+  </section>
+
+  <!-- MOLEKUŁY -->
+  <section class="ds-sec" id="molekuly">
+    <h2><span class="n">G</span> Molekuły</h2>
+
+    <div class="ds-sub">Krok · Stat · Karta opinii</div>
+    <div class="grid-3">
+      <div class="step"><div class="num">1</div><h3>Odpowiadasz</h3><p>Kilka pytań o Twój styl życia.</p></div>
+      <div class="stat"><div class="val">350+</div><div class="lab">przeanalizowanych ras wg FCI</div></div>
+      <div class="review-card"><span class="stars">★★★★★</span><p>„Trafienie w dziesiątkę — w końcu ktoś zapytał o styl życia."</p><div class="who"><div class="avatar"></div>Ania, właścicielka Miry</div></div>
+    </div>
+
+    <div class="ds-sub">Karta artykułu</div>
+    <div class="grid-4">
+      <div class="article-card"><div class="article-thumb"><img src="img/art-mieszkanie.jpg" alt=""><span class="tag">Wybór rasy</span></div><div class="article-body"><h3>Rasa do mieszkania bez ogrodu</h3><p>Trzy rzeczy ważniejsze niż rozmiar psa.</p><span class="more">Zobacz artykuł →</span></div></div>
+      <div class="article-card"><div class="article-thumb"><img src="img/art-nuda.jpg" alt=""><span class="tag">Zachowanie</span></div><div class="article-body"><h3>5 sygnałów, że pies się nudzi</h3><p>I co z tym zrobić.</p><span class="more">Zobacz artykuł →</span></div></div>
+    </div>
+
+    <div class="ds-sub">Karta dopasowania (hero)</div>
+    <div style="max-width:400px">
+      <div class="report-card">
+        <div class="card-photo"><img src="img/dog-hero-border-collie.jpg" alt="Border collie"><span class="photo-badge"><svg class="ic solid"><use href="#ic-paw"/></svg> Twoje dopasowanie</span></div>
+        <div class="card-inner">
+          <div class="pct-row"><div class="pct-circle">92%</div><div><div class="lab">Rasa dopasowana do Ciebie</div><h3>Border collie</h3></div></div>
+          <div class="pill-row"><span class="pill"><b>96%</b> tresura</span><span class="pill"><b>92%</b> styl życia</span></div>
+          <ul><li><svg class="ic"><use href="#ic-bolt"/></svg> Pasuje do Twojej aktywności.</li><li><svg class="ic"><use href="#ic-home"/></svg> Ogród daje przestrzeń.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-sub">Feature card · Value list</div>
+    <div class="grid-2">
+      <div class="feature-card alt"><div class="ico-badge"><svg class="ic solid"><use href="#ic-paw"/></svg></div><h3>Sprawdzeni hodowcy</h3><p class="desc">Każdego hodowcę weryfikujemy osobiście.</p><div class="quote-block"><span class="qmark">"</span><div><p>Klienci z Zwierzaki wiedzą, czego oczekiwać.</p><div class="qwho">Marek — Hodowla Border Meadow</div></div></div><a class="btn btn-outline" style="align-self:flex-start">Zobacz hodowców</a></div>
+      <div class="card" style="padding:32px">
+        <ul class="value-list" style="margin:0">
+          <li><div class="vi"><svg class="ic"><use href="#ic-target"/></svg></div><div><h4>Dokładny procent dopasowania</h4><p>Konkretna rasa i konkretna liczba.</p></div></li>
+          <li><div class="vi"><svg class="ic"><use href="#ic-compass"/></svg></div><div><h4>Uzasadnienie, nie wyrocznia</h4><p>Widzisz, dlaczego ta rasa pasuje.</p></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-sub">Wiersz hodowcy · Opcja ankiety · Podobna rasa · FAQ · Why-card · KPI</div>
+    <div class="breeder-list" style="margin-top:0">
+      <div class="breeder-row">
+        <img class="breeder-avatar" src="img/art-hodowca.jpg" alt="">
+        <div><div class="stars">★★★★☆</div><h3 style="font-size:19px;margin:4px 0 0">Hodowla Border Meadow</h3><div class="breeder-meta"><span><svg class="ic"><use href="#ic-pin"/></svg> Mazowieckie</span><span><svg class="ic"><use href="#ic-bone"/></svg> border collie</span><span style="color:var(--pine);font-weight:700"><svg class="ic"><use href="#ic-verified"/></svg> zweryfikowana</span></div></div>
+        <a class="btn btn-soft btn-sm br-cta">Zobacz profil →</a>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:16px">
+      <div class="options" style="margin:0">
+        <div class="option selected" onclick="selectOpt(this)"><span class="oi"><svg class="ic"><use href="#ic-building"/></svg></span><span class="ot">Mieszkanie w bloku</span></div>
+        <div class="option" onclick="selectOpt(this)"><span class="oi"><svg class="ic"><use href="#ic-home"/></svg></span><span class="ot">Dom z ogrodem</span></div>
+      </div>
+      <div class="similar-row" style="grid-template-columns:1fr 1fr;margin:0">
+        <div class="similar-card"><div class="similar-thumb"><img src="img/art-dzieci.jpg" alt=""></div><div class="similar-info"><span>Owczarek</span><span class="pct">84%</span></div></div>
+        <div class="why-card"><div class="ico"><svg class="ic"><use href="#ic-bolt"/></svg></div><h4>Pasuje do aktywności</h4><p>Energia rasy odpowiada Twojemu czasowi.</p></div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card" style="padding:8px 28px"><div class="faq" style="max-width:none"><div class="faq-item" style="border:none"><h3>Czy test jest płatny?</h3><p>Nie. Test i pierwszy raport są bezpłatne.</p></div></div></div>
+      <div class="card" style="padding:28px"><div class="kpi-row" style="margin:0"><div class="kpi"><div class="n">12</div><div class="l">miotów</div></div><div class="kpi"><div class="n">3</div><div class="l">lata</div></div><div class="kpi"><div class="n">5</div><div class="l">szczeniąt</div></div></div></div>
+    </div>
+    <div class="ds-sub">Postęp ankiety (łapki)</div>
+    <div class="frame"><div class="paw-progress" style="margin:0">
+      <svg class="p done" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1 1.9-2.3S5.5 5.6 4.5 5.6s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3zm5.6-1.4c1 0 1.9-1.1 1.9-2.4S11.1 4 10.1 4 8.2 5.1 8.2 6.4s.9 2.4 1.9 2.4zm7.9-2.4c0-1.3-.9-2.4-1.9-2.4s-1.9 1.1-1.9 2.4 .9 2.4 1.9 2.4 1.9-1.1 1.9-2.4zm2.6 5.2c0-1.3-.9-2.3-1.9-2.3s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3 1.9-1 1.9-2.3zM12 12.4c-2.6 0-6.4 2.7-6.4 5.4 0 1.3 1 2.2 2.3 2.2.9 0 1.5-.4 2.4-.4.7 0 1.3.4 1.7.4s1-.4 1.7-.4c.9 0 1.5.4 2.4.4 1.3 0 2.3-.9 2.3-2.2 0-2.7-3.8-5.4-6.4-5.4z"/></svg>
+      <svg class="p done" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1 1.9-2.3S5.5 5.6 4.5 5.6s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3zm5.6-1.4c1 0 1.9-1.1 1.9-2.4S11.1 4 10.1 4 8.2 5.1 8.2 6.4s.9 2.4 1.9 2.4zm7.9-2.4c0-1.3-.9-2.4-1.9-2.4s-1.9 1.1-1.9 2.4 .9 2.4 1.9 2.4 1.9-1.1 1.9-2.4zm2.6 5.2c0-1.3-.9-2.3-1.9-2.3s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3 1.9-1 1.9-2.3zM12 12.4c-2.6 0-6.4 2.7-6.4 5.4 0 1.3 1 2.2 2.3 2.2.9 0 1.5-.4 2.4-.4.7 0 1.3.4 1.7.4s1-.4 1.7-.4c.9 0 1.5.4 2.4.4 1.3 0 2.3-.9 2.3-2.2 0-2.7-3.8-5.4-6.4-5.4z"/></svg>
+      <svg class="p" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1 1.9-2.3S5.5 5.6 4.5 5.6s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3zm5.6-1.4c1 0 1.9-1.1 1.9-2.4S11.1 4 10.1 4 8.2 5.1 8.2 6.4s.9 2.4 1.9 2.4zm7.9-2.4c0-1.3-.9-2.4-1.9-2.4s-1.9 1.1-1.9 2.4 .9 2.4 1.9 2.4 1.9-1.1 1.9-2.4zm2.6 5.2c0-1.3-.9-2.3-1.9-2.3s-1.9 1-1.9 2.3 .9 2.3 1.9 2.3 1.9-1 1.9-2.3zM12 12.4c-2.6 0-6.4 2.7-6.4 5.4 0 1.3 1 2.2 2.3 2.2.9 0 1.5-.4 2.4-.4.7 0 1.3.4 1.7.4s1-.4 1.7-.4c.9 0 1.5.4 2.4.4 1.3 0 2.3-.9 2.3-2.2 0-2.7-3.8-5.4-6.4-5.4z"/></svg>
+    </div></div>
+  </section>
+
+  <!-- ORGANIZMY -->
+  <section class="ds-sec" id="organizmy">
+    <h2><span class="n">H</span> Organizmy</h2>
+    <div class="ds-note">Pełne, złożone bloki (nawigacja, hero, sekcja misji, stopka) zobaczysz w akcji na żywych podstronach — <a href="index.html" style="color:var(--clay-deep);font-weight:700">otwórz podgląd strony głównej →</a>. Poniżej sekcja misji i pasek statystyk jako przykład organizmów.</div>
+    <div class="ds-sub">Pasek statystyk (3)</div>
+    <div class="stats-3" style="margin-top:0">
+      <div class="stat"><div class="val">350+</div><div class="lab">przeanalizowanych ras wg FCI</div></div>
+      <div class="stat"><div class="val">600+</div><div class="lab">wywiadów z właścicielami</div></div>
+      <div class="stat"><div class="val">92%</div><div class="lab">trafność po odbiorze szczeniaka</div></div>
+    </div>
+    <div class="ds-sub">Sekcja misji (ciemna)</div>
+    <div class="mission" style="border-radius:var(--r-xl);padding:48px 32px">
+      <div class="center"><span class="eyebrow">Dlaczego to robimy</span><h2 style="margin-top:10px">Wybór psa to zobowiązanie na całe życie</h2></div>
+      <div class="mission-stats" style="max-width:700px;margin:32px auto 0"><div class="mission-stat"><div class="val">81 778</div><div class="lab">psów w schroniskach w 2023 (dane GLW)</div></div><div class="mission-stat"><div class="val">~37%</div><div class="lab">nie znalazło w tym czasie domu</div></div></div>
+    </div>
+  </section>
+
+  <!-- AURA -->
+  <section class="ds-sec" id="aura" style="border-bottom:none">
+    <h2><span class="n">I</span> Aura — animowane tło</h2>
+    <p style="color:var(--ink-soft);font-weight:600;max-width:640px">Trzy rozmyte plamy dryfujące za sekcją hero. Wszystkie parametry są tokenami CSS — zmiana w <code style="font-family:ui-monospace,monospace">:root</code> aktualizuje każdą stronę naraz.</p>
+    <div class="frame" style="margin-top:20px">
+      <table style="width:100%;border-collapse:collapse;font-family:ui-monospace,Menlo,monospace;font-size:12.5px">
+        <tr style="border-bottom:1px solid var(--line)"><td style="padding:8px 0;color:var(--ink)">--aura-blur</td><td style="color:var(--ink-soft)">64px — rozmycie plam</td></tr>
+        <tr style="border-bottom:1px solid var(--line)"><td style="padding:8px 0;color:var(--ink)">--aura-speed-1/2/3</td><td style="color:var(--ink-soft)">12s / 14s / 10s — tempo dryfu</td></tr>
+        <tr style="border-bottom:1px solid var(--line)"><td style="padding:8px 0;color:var(--ink)">--aura-opacity-clay</td><td style="color:var(--ink-soft)">.72 — siła plamy glinianej</td></tr>
+        <tr style="border-bottom:1px solid var(--line)"><td style="padding:8px 0;color:var(--ink)">--aura-opacity-pine</td><td style="color:var(--ink-soft)">.60 — siła plamy zielonej</td></tr>
+        <tr><td style="padding:8px 0;color:var(--ink)">--aura-opacity-sand</td><td style="color:var(--ink-soft)">.68 — siła plamy piaskowej</td></tr>
+      </table>
+    </div>
+    <div class="ds-note">Dostępność: przy <code>prefers-reduced-motion: reduce</code> animacja jest wyłączana — plamy zostają statyczne.</div>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0"><span>© 2026 Zwierzaki · Design System v1.0</span><span>Koncept D — Ciepły, stonowany</span></div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
