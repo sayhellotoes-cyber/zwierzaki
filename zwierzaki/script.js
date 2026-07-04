@@ -13,3 +13,10 @@ function unlockReport(){
   const el = document.getElementById('raport');
   if (el) el.classList.remove('locked');
 }
+
+// Nawigacja mobilna: przełączanie rozwijanego menu (hamburger)
+function toggleNav(btn){
+  const nav = btn.closest('nav');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
