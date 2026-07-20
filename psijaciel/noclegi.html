@@ -125,7 +125,7 @@ initListing({
   renderCard: s => {
     const F = { bezoplaty:['ic-check','Bez opłaty za psa'], ogrodzenie:['ic-shield','Ogrodzony teren'], restauracja:['ic-heart','Pies w restauracji'], pokoj:['ic-home','Pies sam w pokoju OK'], natura:['ic-leaf','Blisko lasu/plaży'] };
     const chips = s.features.map(f => `<span class="dogchip"><svg class="ic"><use href="#${F[f][0]}"/></svg> ${F[f][1]}</span>`).join('');
-    return `<div class="place stay" data-id="${s.id}">
+    return `<a class="place stay" href="nocleg.html" data-id="${s.id}">
       <div class="stay-photo"><img src="${s.img}" alt="${s.name}">
         ${s.verified ? '<span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> Zweryfikowany</span>' : ''}
         <span class="stay-price">od ${s.price}<small> /noc</small></span>
@@ -136,7 +136,7 @@ initListing({
         <p class="stay-vibe">${s.vibe}</p>
         <div class="stay-dog">${chips}</div>
       </div>
-    </div>`;
+    </a>`;
   },
   items:[
     { id:1, name:'Chata pod Reglami', cat:'nocleg', region:'Tatry · Zakopane', vibe:'Drewniana chata z widokiem na góry i ogrodzonym ogrodem.', price:'320 zł', rating:'4.9', verified:true, features:['ogrodzenie','bezoplaty','natura'], img:'img/art-hodowca.jpg', lat:49.2992, lng:19.9496 },
