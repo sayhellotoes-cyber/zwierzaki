@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Noclegi przyjazne psom — domki, apartamenty z psią polityką | Psijaciel</title>
+<meta name="description" content="Znajdź nocleg, gdzie pies jest gościem, nie problemem. Filtruj po psiej polityce: opłata za psa, ogrodzony teren, pies w restauracji, sam w pokoju. Lista i mapa.">
+<link rel="canonical" href="https://psijaciel.pl/noclegi">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#FBF5EC">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Psijaciel">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Noclegi przyjazne psom | Psijaciel">
+<meta property="og:description" content="Nocleg, gdzie pies jest gościem. Filtruj po psiej polityce obiektu.">
+<meta property="og:url" content="https://psijaciel.pl/noclegi">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<nav class="site" aria-label="Nawigacja główna">
+  <div class="wrap">
+    <a class="logo wm" href="index.html" aria-label="Psijaciel — strona główna"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <div class="navlinks">
+      <a href="konfigurator.html">Konfigurator ras</a>
+      <a href="miejsca.html">Miejsca</a>
+      <a href="noclegi.html" class="active">Noclegi</a>
+      <div class="hasmenu">
+        <button aria-haspopup="true" aria-expanded="false">Specjaliści <span aria-hidden="true">▾</span></button>
+        <div class="menu" role="menu">
+          <a href="behawiorysci.html"><svg class="ic"><use href="#ic-bulb"/></svg><span><b>Behawioryści i trenerzy</b><span>Lęk, agresja, szczeniak, szkolenie</span></span></a>
+          <a href="hodowcy.html"><svg class="ic"><use href="#ic-bone"/></svg><span><b>Hodowcy</b><span>Odpowiedzialne hodowle z weryfikacją</span></span></a>
+        </div>
+      </div>
+      <a href="artykuly.html">Artykuły</a>
+      <a href="kursy.html">Kursy</a>
+      <a href="konto.html" class="mobile-only">Konto</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="section" style="padding:34px 0 60px">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Okruszki" style="margin-bottom:14px"><a href="index.html">Strona główna</a><span class="sep">/</span>Noclegi</nav>
+
+      <div class="listing-top">
+        <div>
+          <h1>Noclegi przyjazne psom</h1>
+          <span class="count" id="count">…</span>
+        </div>
+      </div>
+
+      <div class="stay-search">
+        <div class="field"><label>Dokąd</label><input type="text" placeholder="Region lub miejscowość"></div>
+        <div class="field"><label>Kiedy</label><input type="text" placeholder="Wybierz termin"></div>
+        <div class="field"><label>Psy</label><select><option>1 pies</option><option>2 psy</option><option>3 i więcej</option></select></div>
+        <div class="field" style="border:none"><label>Waga największego psa</label><select><option>do 10 kg</option><option>10–25 kg</option><option>ponad 25 kg</option></select></div>
+        <button class="btn btn-primary"><svg class="ic"><use href="#ic-search"/></svg> Szukaj</button>
+      </div>
+
+      <div class="listing-filters">
+        <button class="filter-pill active" data-cat="all">Wszystkie</button>
+        <button class="filter-pill" data-cat="bezoplaty">Bez opłaty za psa</button>
+        <button class="filter-pill" data-cat="ogrodzenie">Ogrodzony teren</button>
+        <button class="filter-pill" data-cat="restauracja">Pies w restauracji</button>
+        <button class="filter-pill" data-cat="pokoj">Pies sam w pokoju OK</button>
+        <button class="filter-pill" data-cat="natura">Blisko lasu / plaży</button>
+      </div>
+
+      <div class="map-toggle">
+        <button data-v="list" class="active">Lista</button>
+        <button data-v="map">Mapa</button>
+      </div>
+
+      <div class="listing show-list">
+        <div class="listing-list" id="list"></div>
+        <div class="listing-map"><div id="map"></div></div>
+      </div>
+
+      <div class="listing-cta">
+        <div><b>Prowadzisz obiekt przyjazny psom?</b><br><span style="color:var(--ink-soft);font-weight:600">Dodaj go i pokaż psią politykę tam, gdzie ludzie jej szukają.</span></div>
+        <a class="btn btn-primary" href="#"><svg class="ic"><use href="#ic-bed"/></svg> Dodaj obiekt</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0">
+      <span>© 2026 Psijaciel</span>
+      <span style="display:flex;gap:22px"><a href="#">Polityka prywatności</a><a href="#">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+<script src="listing.js"></script>
+<script>
+initListing({
+  center:[52.0, 19.3], zoom:6,
+  cats:{ nocleg:'Nocleg przyjazny psom' },
+  catIcon:{ nocleg:'ic-bed' },
+  plural: n => { const d=n%10, s=n%100; if(n===1) return 'obiekt'; return (d>=2&&d<=4&&!(s>=12&&s<=14)) ? 'obiekty' : 'obiektów'; },
+  match: (i, c) => i.features.includes(c),
+  renderCard: s => {
+    const F = { bezoplaty:['ic-check','Bez opłaty za psa'], ogrodzenie:['ic-shield','Ogrodzony teren'], restauracja:['ic-heart','Pies w restauracji'], pokoj:['ic-home','Pies sam w pokoju OK'], natura:['ic-leaf','Blisko lasu/plaży'] };
+    const chips = s.features.map(f => `<span class="dogchip"><svg class="ic"><use href="#${F[f][0]}"/></svg> ${F[f][1]}</span>`).join('');
+    return `<div class="place stay" data-id="${s.id}">
+      <div class="stay-photo"><img src="${s.img}" alt="${s.name}">
+        ${s.verified ? '<span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> Zweryfikowany</span>' : ''}
+        <span class="stay-price">od ${s.price}<small> /noc</small></span>
+      </div>
+      <div class="stay-body">
+        <div class="stay-head"><h3>${s.name}</h3><span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> ${s.rating}</span></div>
+        <div class="stay-region"><svg class="ic"><use href="#ic-pin"/></svg> ${s.region}</div>
+        <p class="stay-vibe">${s.vibe}</p>
+        <div class="stay-dog">${chips}</div>
+      </div>
+    </div>`;
+  },
+  items:[
+    { id:1, name:'Chata pod Reglami', cat:'nocleg', region:'Tatry · Zakopane', vibe:'Drewniana chata z widokiem na góry i ogrodzonym ogrodem.', price:'320 zł', rating:'4.9', verified:true, features:['ogrodzenie','bezoplaty','natura'], img:'img/art-hodowca.jpg', lat:49.2992, lng:19.9496 },
+    { id:2, name:'Siedlisko nad Jeziorem', cat:'nocleg', region:'Mazury · Mikołajki', vibe:'Klimatyczne domki tuż nad wodą, pomost tylko dla Was.', price:'280 zł', rating:'4.8', verified:true, features:['ogrodzenie','natura','pokoj'], img:'img/art-dzieci.jpg', lat:53.8018, lng:21.5806 },
+    { id:3, name:'Nadmorska Przystań', cat:'nocleg', region:'Pomorze · Łeba', vibe:'Apartamenty 400 m od psiej plaży.', price:'350 zł', rating:'4.7', verified:false, features:['natura','restauracja'], img:'img/art-mieszkanie.jpg', lat:54.7601, lng:17.5551 },
+    { id:4, name:'Bieszczadzki Zakątek', cat:'nocleg', region:'Bieszczady · Cisna', vibe:'Cisza, las za progiem i miska wody na tarasie.', price:'240 zł', rating:'5.0', verified:true, features:['ogrodzenie','bezoplaty','natura','pokoj'], img:'img/art-nuda.jpg', lat:49.2170, lng:22.3210 },
+    { id:5, name:'Kaszubska Checz', cat:'nocleg', region:'Kaszuby · Wdzydze', vibe:'Tradycyjna checz z dużym ogrodzonym terenem.', price:'260 zł', rating:'4.6', verified:true, features:['ogrodzenie','bezoplaty'], img:'img/dog-hero-border-collie.jpg', lat:54.0300, lng:17.9000 },
+    { id:6, name:'Dolina Smaku Resort', cat:'nocleg', region:'Dolny Śląsk · Karpacz', vibe:'Hotel z restauracją, do której wejdziesz z psem.', price:'390 zł', rating:'4.5', verified:false, features:['restauracja','pokoj'], img:'img/art-hodowca.jpg', lat:50.7780, lng:15.7490 },
+    { id:7, name:'Kazimierski Dworek', cat:'nocleg', region:'Mazowsze · Kazimierz Dolny', vibe:'Dworek nad Wisłą, blisko szlaki spacerowe.', price:'300 zł', rating:'4.8', verified:true, features:['bezoplaty','natura'], img:'img/art-mieszkanie.jpg', lat:51.3190, lng:21.9540 }
+  ]
+});
+</script>
+</body>
+</html>

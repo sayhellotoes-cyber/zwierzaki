@@ -450,7 +450,7 @@ footer.site .wrap{padding-top:60px;padding-bottom:34px}
 #map{width:100%;height:100%;background:var(--cream-deep)}
 .empty{color:var(--ink-soft);font-weight:600;padding:30px 6px}
 
-.place{display:flex;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:13px;cursor:pointer;transition:.14s ease}
+.place{display:flex;flex-shrink:0;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:13px;cursor:pointer;transition:.14s ease}
 .place:hover{border-color:var(--clay);box-shadow:var(--shadow-sm)}
 .place.active{border-color:var(--clay);background:var(--clay-tint)}
 .place-thumb{width:92px;height:92px;flex:none;border-radius:var(--r-md);background:var(--clay-tint);color:var(--clay-deep);display:grid;place-items:center;font-size:30px}
@@ -520,3 +520,31 @@ footer.site .wrap{padding-top:60px;padding-bottom:34px}
   color:var(--pine);background:var(--pine-tint);padding:4px 9px;border-radius:var(--r-pill);white-space:nowrap;flex:none}
 .spec .meta{margin-top:11px}
 .spec .price b{font-family:var(--font-display);color:var(--ink)}
+
+/* ==========================================================================
+   Noclegi (styl Slowhop) — karta na silniku Listing
+   ========================================================================== */
+.stay-search{display:flex;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:8px;box-shadow:var(--shadow-sm);margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.stay-search .field{flex:1;min-width:150px;padding:8px 18px;border-right:1px solid var(--line-soft)}
+.stay-search .field label{display:block;font-family:var(--font-display);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:2px}
+.stay-search .field input,.stay-search .field select{border:none;background:none;font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--ink);width:100%;outline:none;cursor:pointer}
+.stay-search .btn{margin:4px 6px 4px auto}
+
+.stay{flex-direction:column;padding:0;overflow:hidden;gap:0}
+.stay-photo{position:relative;height:200px;flex:none}
+.stay-photo img{width:100%;height:100%;object-fit:cover}
+.stay-photo .verified{position:absolute;top:12px;left:12px;box-shadow:var(--shadow-sm)}
+.stay-price{position:absolute;bottom:12px;right:12px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-family:var(--font-display);font-weight:800;color:var(--ink);padding:6px 13px;border-radius:var(--r-pill);font-size:15px;box-shadow:var(--shadow-sm)}
+.stay-price small{font-weight:600;color:var(--ink-soft);font-size:12px}
+.stay-body{padding:15px 18px 18px}
+.stay-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.stay-head h3{font-size:18px;line-height:1.2}
+.stay-region{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--ink-soft);font-weight:700;margin-top:4px}
+.stay-region .ic{color:var(--ink-faint)}
+.stay-vibe{font-size:14px;color:var(--ink-soft);font-weight:600;margin:9px 0 12px}
+.stay-dog{display:flex;flex-wrap:wrap;gap:7px}
+.dogchip{display:inline-flex;gap:6px;align-items:center;font-family:var(--font-display);font-weight:700;font-size:11.5px;
+  background:var(--pine-tint);color:var(--pine);padding:4px 11px;border-radius:var(--r-pill)}
+.dogchip .ic{width:1em;height:1em}
