@@ -67,7 +67,11 @@
           <span class="count" id="count">…</span>
         </div>
         <div class="city-row">
-          <button class="city-pill"><svg class="ic"><use href="#ic-pin"/></svg> Warszawa <span aria-hidden="true">▾</span></button>
+          <div class="place-search">
+            <svg class="ic search-ic"><use href="#ic-search"/></svg>
+            <input class="ps-input" type="text" autocomplete="off" aria-label="Szukaj miejscowości" placeholder="Zmień miasto…" value="Warszawa">
+            <div class="ps-dd" hidden></div>
+          </div>
           <button class="btn btn-outline btn-sm" id="near"><svg class="ic"><use href="#ic-target"/></svg> W pobliżu</button>
         </div>
       </div>

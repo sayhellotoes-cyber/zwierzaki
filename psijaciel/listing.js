@@ -115,3 +115,26 @@ function initListing(cfg){
 
   render();
 }
+
+/* Wyszukiwarka miejscowości (combobox z filtrowaną listą) — na stronach listingów */
+function initPlaceSearch(){
+  const POPULAR = ['Warszawa','Kraków','Wrocław','Poznań','Gdańsk','Łódź','Katowice','Lublin','Szczecin','Bydgoszcz','Zakopane','Białystok'];
+  document.querySelectorAll('.place-search').forEach(box => {
+    const input = box.querySelector('.ps-input'), dd = box.querySelector('.ps-dd');
+    if(!input || !dd) return;
+    function draw(q){
+      const query = (q || '').trim().toLowerCase();
+      const list = POPULAR.filter(c => c.toLowerCase().includes(query));
+      dd.innerHTML = '<div class="ps-h">Popularne miasta</div>' + (list.length
+        ? list.map(c => `<div class="ps-item" data-v="${c}"><svg class="ic"><use href="#ic-pin"/></svg> ${c}</div>`).join('')
+        : '<div class="ps-item empty">Brak podpowiedzi — wpisz nazwę i szukaj</div>');
+      dd.querySelectorAll('.ps-item[data-v]').forEach(it => it.addEventListener('mousedown', e => {
+        e.preventDefault(); input.value = it.dataset.v; dd.hidden = true; input.blur();
+      }));
+    }
+    input.addEventListener('focus', () => { draw(''); dd.hidden = false; input.select(); });
+    input.addEventListener('input', () => { draw(input.value); dd.hidden = false; });
+    document.addEventListener('click', e => { if(!box.contains(e.target)) dd.hidden = true; });
+  });
+}
+initPlaceSearch();

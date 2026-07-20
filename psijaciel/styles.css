@@ -613,3 +613,65 @@ input.input{width:100%}
   .gallery img:first-child{grid-row:span 2}
   .profile-headrow h1{font-size:30px}
 }
+
+/* ==========================================================================
+   Kursy — katalog + strona kursu
+   ========================================================================== */
+.course-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;transition:.18s ease;height:100%}
+.course-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.course-cover{position:relative;height:168px;flex:none}
+.course-cover img{width:100%;height:100%;object-fit:cover}
+.course-cover .lvl{position:absolute;top:12px;left:12px;font-family:var(--font-display);font-weight:700;font-size:11.5px;background:rgba(251,245,236,.94);color:var(--clay-deep);padding:5px 11px;border-radius:var(--r-pill)}
+.course-body{padding:17px 19px 19px;display:flex;flex-direction:column;flex:1}
+.course-body h3{font-size:18px;line-height:1.2;margin-bottom:7px}
+.course-author{font-size:13px;color:var(--ink-soft);font-weight:700;display:inline-flex;gap:7px;align-items:center;margin-bottom:12px}
+.course-author .ic{color:var(--ink-faint)}
+.course-meta{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:15px}
+.course-meta span{display:inline-flex;gap:6px;align-items:center}
+.course-meta .ic{color:var(--ink-faint)}
+.course-meta .rating .ic{color:var(--sand)}
+.course-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.course-foot .price{font-family:var(--font-display);font-weight:800;font-size:21px;color:var(--ink)}
+
+/* player / preview */
+.player{position:relative;border-radius:var(--r-xl);overflow:hidden;background:var(--ink);aspect-ratio:16/9;display:grid;place-items:center;box-shadow:var(--shadow)}
+.player img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.player .play{position:relative;width:76px;height:76px;border-radius:50%;background:rgba(251,245,236,.95);display:grid;place-items:center;color:var(--clay-deep);cursor:pointer;box-shadow:var(--shadow)}
+.player .play .ic{width:30px;height:30px;margin-left:4px}
+.player .plabel{position:absolute;top:16px;left:16px;z-index:2;font-family:var(--font-display);font-weight:700;font-size:12px;color:#fff;background:rgba(46,100,90,.9);padding:6px 12px;border-radius:var(--r-pill)}
+
+.curriculum{display:flex;flex-direction:column;gap:12px}
+.module{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.module-head{background:var(--cream-deep);padding:14px 18px;font-family:var(--font-display);font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.module-head .mmeta{color:var(--ink-soft);font-weight:600;font-size:13px}
+.lesson{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 18px;border-top:1px solid var(--line-soft);background:var(--surface)}
+.lesson .l-left{display:flex;gap:11px;align-items:center;font-weight:600}
+.lesson .l-left .ic{color:var(--clay);flex:none}
+.lesson.free .l-left .ic{color:var(--pine)}
+.lesson.locked{color:var(--ink-faint)}
+.lesson.locked .l-left .ic{color:var(--ink-faint)}
+.lesson .free-badge{font-family:var(--font-display);font-weight:700;font-size:11px;color:var(--pine);background:var(--pine-tint);padding:2px 9px;border-radius:var(--r-pill)}
+.lesson .time{font-size:13px;color:var(--ink-soft);font-weight:600;flex:none}
+
+.pay-methods{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pay{font-family:var(--font-display);font-weight:700;font-size:12px;background:var(--cream-deep);color:var(--ink);padding:6px 12px;border-radius:var(--r-sm)}
+.guarantee{display:inline-flex;gap:9px;align-items:center;background:var(--pine-tint);color:var(--pine);font-family:var(--font-display);font-weight:700;font-size:13px;padding:10px 14px;border-radius:var(--r-md);margin-top:16px;width:100%}
+
+/* ==========================================================================
+   Wyszukiwarka miejscowości (combobox) — listingi
+   ========================================================================== */
+.place-search{position:relative}
+.place-search .search-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-faint);pointer-events:none;width:18px;height:18px}
+.ps-input{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);background:var(--surface);
+  border:1.5px solid var(--line);border-radius:var(--r-pill);padding:11px 18px 11px 42px;width:250px;outline:none;transition:.15s}
+.ps-input::placeholder{color:var(--ink-faint);font-weight:600}
+.ps-input:focus{border-color:var(--clay)}
+.ps-dd{position:absolute;top:calc(100% + 8px);left:0;min-width:250px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-md);box-shadow:var(--shadow);padding:6px;z-index:70;max-height:300px;overflow:auto}
+.ps-dd[hidden]{display:none}
+.ps-h{font-family:var(--font-display);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);padding:9px 12px 5px}
+.ps-item{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:var(--r-sm);cursor:pointer;font-weight:600;font-size:14.5px}
+.ps-item:hover{background:var(--cream)}
+.ps-item .ic{color:var(--clay);flex:none}
+.ps-item.empty{color:var(--ink-soft);cursor:default}
+.ps-item.empty:hover{background:none}
