@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Konfigurator ras — dobierz psa do swojego stylu życia | Psijaciel</title>
+<meta name="description" content="Odpowiedz na kilka pytań o swoim stylu życia i poznaj rasy psów najlepiej dopasowane do Ciebie — z uzasadnieniem. Trzy minuty, bez rejestracji.">
+<link rel="canonical" href="https://psijaciel.pl/konfigurator">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#FBF5EC">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Psijaciel">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Konfigurator ras psów — dopasowanie do stylu życia | Psijaciel">
+<meta property="og:description" content="Trzy minuty pytań i poznajesz najlepiej dopasowane rasy — z uzasadnieniem.">
+<meta property="og:url" content="https://psijaciel.pl/konfigurator">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<nav class="site" aria-label="Nawigacja główna">
+  <div class="wrap">
+    <a class="logo wm" href="index.html" aria-label="Psijaciel — strona główna"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <div class="navlinks">
+      <a href="konfigurator.html" class="active">Konfigurator ras</a>
+      <a href="miejsca.html">Miejsca</a>
+      <a href="noclegi.html">Noclegi</a>
+      <div class="hasmenu">
+        <button aria-haspopup="true" aria-expanded="false">Specjaliści <span aria-hidden="true">▾</span></button>
+        <div class="menu" role="menu">
+          <a href="behawiorysci.html"><svg class="ic"><use href="#ic-bulb"/></svg><span><b>Behawioryści i trenerzy</b><span>Lęk, agresja, szczeniak, szkolenie</span></span></a>
+          <a href="hodowcy.html"><svg class="ic"><use href="#ic-bone"/></svg><span><b>Hodowcy</b><span>Odpowiedzialne hodowle z weryfikacją</span></span></a>
+        </div>
+      </div>
+      <a href="artykuly.html">Artykuły</a>
+      <a href="kursy.html">Kursy</a>
+      <a href="konto.html" class="mobile-only">Konto</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="quiz">
+    <div class="wrap">
+      <div class="quiz-wrap" id="quiz"><!-- render: konfigurator.js --></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0">
+      <span>© 2026 Psijaciel</span>
+      <span style="display:flex;gap:22px"><a href="#">Polityka prywatności</a><a href="#">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="konfigurator.js"></script>
+</body>
+</html>
