@@ -71,13 +71,13 @@ function initListing(cfg){
     const pts = [];
     items.forEach(i => {
       const m = L.marker([i.lat, i.lng], { icon:pinIcon(i, false) }).addTo(map);
-      m.bindPopup(`<b>${i.name}</b><br>${catLabel(i.cat)} · ⭐ ${i.rating}`);
+      m.bindPopup(`<b>${i.name}</b><br>${catLabel(i.cat)}${i.rating ? ' · ⭐ '+i.rating : ''}`);
       m.on('click', () => select(i.id, true));
       markers[i.id] = m;
       pts.push([i.lat, i.lng]);
     });
     if(pts.length) map.fitBounds(pts, { padding:[40,40], maxZoom:14 });
-    if(countEl) countEl.textContent = items.length + ' ' + plural(items.length);
+    if(countEl) countEl.textContent = items.length + ' ' + (cfg.plural || plural)(items.length);
   }
 
   function plural(n){ if(n===1) return 'miejsce'; const d=n%10, s=n%100; return (d>=2&&d<=4&&!(s>=12&&s<=14)) ? 'miejsca' : 'miejsc'; }

@@ -491,3 +491,20 @@ footer.site .wrap{padding-top:60px;padding-bottom:34px}
   .listing.show-map .listing-list{display:none}
   .listing-top h1{font-size:30px}
 }
+
+/* ==========================================================================
+   Hodowcy — karta na silniku Listing
+   ========================================================================== */
+.breeder-thumb{width:96px;height:96px;flex:none;border-radius:var(--r-md);overflow:hidden}
+.breeder-thumb img{width:100%;height:100%;object-fit:cover}
+.litter{font-family:var(--font-display);font-weight:700;font-size:11.5px;padding:3px 10px;border-radius:var(--r-pill);white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.litter::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.litter.avail{background:var(--pine-tint);color:var(--pine)}
+.litter.plan{background:var(--clay-tint);color:var(--clay-deep)}
+.litter.none{background:var(--cream-deep);color:var(--ink-soft)}
+.place .contact{margin-top:12px}
+.edu-banner{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:var(--pine-tint);border-radius:var(--r-lg);padding:15px 22px;margin-bottom:18px}
+.edu-banner .t{display:flex;gap:13px;align-items:center;font-weight:600;color:var(--ink)}
+.edu-banner .t .ic{color:var(--pine);flex:none}
+.edu-banner b{font-family:var(--font-display)}

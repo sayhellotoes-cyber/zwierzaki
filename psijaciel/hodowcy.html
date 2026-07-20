@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hodowcy psów z weryfikacją ZKwP/FCI — lista i mapa | Psijaciel</title>
+<meta name="description" content="Znajdź odpowiedzialnego hodowcę psa rasowego. Lista i mapa hodowli z weryfikacją ZKwP/FCI, statusem miotu i kontaktem przez portal. Filtruj po rasie.">
+<link rel="canonical" href="https://psijaciel.pl/hodowcy">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#FBF5EC">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Psijaciel">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Hodowcy psów z weryfikacją ZKwP/FCI | Psijaciel">
+<meta property="og:description" content="Lista i mapa odpowiedzialnych hodowli z weryfikacją i statusem miotu.">
+<meta property="og:url" content="https://psijaciel.pl/hodowcy">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<nav class="site" aria-label="Nawigacja główna">
+  <div class="wrap">
+    <a class="logo wm" href="index.html" aria-label="Psijaciel — strona główna"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <div class="navlinks">
+      <a href="konfigurator.html">Konfigurator ras</a>
+      <a href="miejsca.html">Miejsca</a>
+      <a href="noclegi.html">Noclegi</a>
+      <div class="hasmenu">
+        <button aria-haspopup="true" aria-expanded="false" class="active">Specjaliści <span aria-hidden="true">▾</span></button>
+        <div class="menu" role="menu">
+          <a href="behawiorysci.html"><svg class="ic"><use href="#ic-bulb"/></svg><span><b>Behawioryści i trenerzy</b><span>Lęk, agresja, szczeniak, szkolenie</span></span></a>
+          <a href="hodowcy.html"><svg class="ic"><use href="#ic-bone"/></svg><span><b>Hodowcy</b><span>Odpowiedzialne hodowle z weryfikacją</span></span></a>
+        </div>
+      </div>
+      <a href="artykuly.html">Artykuły</a>
+      <a href="kursy.html">Kursy</a>
+      <a href="konto.html" class="mobile-only">Konto</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="section" style="padding:34px 0 60px">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Okruszki" style="margin-bottom:14px"><a href="index.html">Strona główna</a><span class="sep">/</span>Hodowcy</nav>
+
+      <div class="listing-top">
+        <div>
+          <h1>Hodowcy z weryfikacją</h1>
+          <span class="count" id="count">…</span>
+        </div>
+        <div class="city-row">
+          <button class="city-pill"><svg class="ic"><use href="#ic-pin"/></svg> Cała Polska <span aria-hidden="true">▾</span></button>
+          <button class="btn btn-outline btn-sm" id="near"><svg class="ic"><use href="#ic-target"/></svg> W pobliżu</button>
+        </div>
+      </div>
+
+      <div class="edu-banner">
+        <div class="t"><svg class="ic ic-lg"><use href="#ic-shield"/></svg> <span><b>Jak odróżnić hodowlę od pseudohodowli?</b> Poznaj listę pytań, które warto zadać przed odbiorem szczeniaka.</span></div>
+        <a class="btn btn-pine btn-sm" href="artykul.html">Zobacz checklistę <svg class="ic"><use href="#ic-arrow"/></svg></a>
+      </div>
+
+      <div class="listing-filters">
+        <button class="filter-pill active" data-cat="all">Wszystkie rasy</button>
+        <button class="filter-pill" data-cat="border">Border collie</button>
+        <button class="filter-pill" data-cat="labrador">Labrador retriever</button>
+        <button class="filter-pill" data-cat="golden">Golden retriever</button>
+        <button class="filter-pill" data-cat="aussie">Owczarek australijski</button>
+        <button class="filter-pill" data-cat="cavalier">Cavalier</button>
+      </div>
+
+      <div class="map-toggle">
+        <button data-v="list" class="active">Lista</button>
+        <button data-v="map">Mapa</button>
+      </div>
+
+      <div class="listing show-list">
+        <div class="listing-list" id="list"></div>
+        <div class="listing-map"><div id="map"></div></div>
+      </div>
+
+      <div class="listing-cta">
+        <div><b>Prowadzisz odpowiedzialną hodowlę?</b><br><span style="color:var(--ink-soft);font-weight:600">Dodaj swoją hodowlę i docieraj do świadomych opiekunów.</span></div>
+        <a class="btn btn-primary" href="#"><svg class="ic"><use href="#ic-bone"/></svg> Dodaj hodowlę</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0">
+      <span>© 2026 Psijaciel</span>
+      <span style="display:flex;gap:22px"><a href="#">Polityka prywatności</a><a href="#">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+<script src="listing.js"></script>
+<script>
+initListing({
+  center:[52.0, 19.3], zoom:6,
+  cats:{ border:'Border collie', labrador:'Labrador retriever', golden:'Golden retriever', aussie:'Owczarek australijski', cavalier:'Cavalier' },
+  catIcon:{ border:'ic-paw', labrador:'ic-paw', golden:'ic-paw', aussie:'ic-paw', cavalier:'ic-paw' },
+  plural: n => { const d=n%10, s=n%100; if(n===1) return 'hodowla'; return (d>=2&&d<=4&&!(s>=12&&s<=14)) ? 'hodowle' : 'hodowli'; },
+  renderCard: b => `<div class="place breeder" data-id="${b.id}">
+    <div class="breeder-thumb"><img src="${b.img}" alt="Hodowla ${b.name}"></div>
+    <div class="place-body">
+      <div class="place-head">
+        <div><div class="cat">${b.breed}</div><h3>${b.name}</h3></div>
+        ${b.verified ? '<span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> ZKwP/FCI</span>' : ''}
+      </div>
+      <div class="meta">
+        <span><svg class="ic"><use href="#ic-pin"/></svg> ${b.city}</span>
+        <span class="litter ${b.litterClass}">${b.litter}</span>
+      </div>
+      ${b.note ? `<div class="note">${b.note}</div>` : ''}
+      <a class="btn btn-primary btn-sm contact" href="hodowca.html" onclick="event.stopPropagation()">Zobacz profil i kontakt</a>
+    </div>
+  </div>`,
+  items:[
+    { id:1, name:'Hodowla z Doliny Wisły', cat:'border', breed:'Border collie', city:'Warszawa', verified:true,  litter:'Dostępny miot', litterClass:'avail', img:'img/dog-hero-border-collie.jpg', note:'Rodzice przebadani (CEA, HD/ED). Szczenięta z rodowodem ZKwP.', lat:52.2297, lng:21.0122 },
+    { id:2, name:'Bernland Kennel', cat:'labrador', breed:'Labrador retriever', city:'Kraków', verified:true, litter:'Planowany miot III 2026', litterClass:'plan', img:'img/art-dzieci.jpg', note:'Linia rodzinna, socjalizacja od 3. tygodnia.', lat:50.0647, lng:19.9450 },
+    { id:3, name:'Golden Dream', cat:'golden', breed:'Golden retriever', city:'Wrocław', verified:true, litter:'Dostępny miot', litterClass:'avail', img:'img/art-hodowca.jpg', note:'Badania genetyczne rodziców, umowa i wyprawka.', lat:51.1079, lng:17.0385 },
+    { id:4, name:'Aussie Spirit', cat:'aussie', breed:'Owczarek australijski', city:'Poznań', verified:false, litter:'Brak miotów', litterClass:'none', img:'img/art-dzieci.jpg', note:'Hodowla aktywna, mioty sezonowe.', lat:52.4064, lng:16.9252 },
+    { id:5, name:'Cavalier House', cat:'cavalier', breed:'Cavalier King Charles spaniel', city:'Gdańsk', verified:true, litter:'Dostępny miot', litterClass:'avail', img:'img/art-mieszkanie.jpg', note:'Badania serca (MVD) i oczu rodziców.', lat:54.3520, lng:18.6466 },
+    { id:6, name:'Highland Borders', cat:'border', breed:'Border collie', city:'Katowice', verified:false, litter:'Planowany miot', litterClass:'plan', img:'img/dog-hero-border-collie.jpg', note:'Psy pracujące i sportowe, testy zdrowia.', lat:50.2649, lng:19.0238 },
+    { id:7, name:'Lakeside Labradors', cat:'labrador', breed:'Labrador retriever', city:'Łódź', verified:true, litter:'Dostępny miot', litterClass:'avail', img:'img/art-dzieci.jpg', note:'Spokojny typ pokojowy, świetne z dziećmi.', lat:51.7592, lng:19.4560 },
+    { id:8, name:'Golden Aura', cat:'golden', breed:'Golden retriever', city:'Lublin', verified:false, litter:'Brak miotów', litterClass:'none', img:'img/art-hodowca.jpg', note:'Zapisy na kolejny miot otwierane wiosną.', lat:51.2465, lng:22.5684 }
+  ]
+});
+</script>
+</body>
+</html>
