@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Behawioryści i trenerzy psów — lęk, agresja, szczeniak | Psijaciel</title>
+<meta name="description" content="Znajdź behawiorystę lub trenera psa: lęk separacyjny, agresja i reaktywność, szczeniak, nosework, obedience. Metody pozytywne, online lub stacjonarnie. Lista i mapa.">
+<link rel="canonical" href="https://psijaciel.pl/behawiorysci">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#FBF5EC">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Psijaciel">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Behawioryści i trenerzy psów | Psijaciel">
+<meta property="og:description" content="Lęk separacyjny, agresja, szczeniak, nosework, obedience — metody pozytywne.">
+<meta property="og:url" content="https://psijaciel.pl/behawiorysci">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<nav class="site" aria-label="Nawigacja główna">
+  <div class="wrap">
+    <a class="logo wm" href="index.html" aria-label="Psijaciel — strona główna"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <div class="navlinks">
+      <a href="konfigurator.html">Konfigurator ras</a>
+      <a href="miejsca.html">Miejsca</a>
+      <a href="noclegi.html">Noclegi</a>
+      <div class="hasmenu">
+        <button aria-haspopup="true" aria-expanded="false" class="active">Specjaliści <span aria-hidden="true">▾</span></button>
+        <div class="menu" role="menu">
+          <a href="behawiorysci.html"><svg class="ic"><use href="#ic-bulb"/></svg><span><b>Behawioryści i trenerzy</b><span>Lęk, agresja, szczeniak, szkolenie</span></span></a>
+          <a href="hodowcy.html"><svg class="ic"><use href="#ic-bone"/></svg><span><b>Hodowcy</b><span>Odpowiedzialne hodowle z weryfikacją</span></span></a>
+        </div>
+      </div>
+      <a href="artykuly.html">Artykuły</a>
+      <a href="kursy.html">Kursy</a>
+      <a href="konto.html" class="mobile-only">Konto</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="section" style="padding:34px 0 60px">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Okruszki" style="margin-bottom:14px"><a href="index.html">Strona główna</a><span class="sep">/</span>Behawioryści i trenerzy</nav>
+
+      <div class="listing-top">
+        <div>
+          <h1>Behawioryści i trenerzy</h1>
+          <span class="count" id="count">…</span>
+        </div>
+        <div class="city-row">
+          <button class="city-pill"><svg class="ic"><use href="#ic-pin"/></svg> Cała Polska + online <span aria-hidden="true">▾</span></button>
+          <button class="btn btn-outline btn-sm" id="near"><svg class="ic"><use href="#ic-target"/></svg> W pobliżu</button>
+        </div>
+      </div>
+
+      <div class="edu-banner">
+        <div class="t"><svg class="ic ic-lg"><use href="#ic-bulb"/></svg> <span><b>Kiedy trener, a kiedy behawiorysta?</b> Wszyscy specjaliści na portalu pracują wyłącznie metodami pozytywnymi, bez awersji.</span></div>
+        <a class="btn btn-pine btn-sm" href="artykul.html">Zobacz poradnik <svg class="ic"><use href="#ic-arrow"/></svg></a>
+      </div>
+
+      <div class="listing-filters">
+        <button class="filter-pill active" data-cat="all">Wszystkie</button>
+        <button class="filter-pill" data-cat="separacja">Lęk separacyjny</button>
+        <button class="filter-pill" data-cat="agresja">Agresja i reaktywność</button>
+        <button class="filter-pill" data-cat="szczeniak">Szczeniak i socjalizacja</button>
+        <button class="filter-pill" data-cat="nosework">Nosework</button>
+        <button class="filter-pill" data-cat="obedience">Obedience</button>
+      </div>
+
+      <div class="map-toggle">
+        <button data-v="list" class="active">Lista</button>
+        <button data-v="map">Mapa</button>
+      </div>
+
+      <div class="listing show-list">
+        <div class="listing-list" id="list"></div>
+        <div class="listing-map"><div id="map"></div></div>
+      </div>
+
+      <div class="listing-cta">
+        <div><b>Jesteś behawiorystą lub trenerem?</b><br><span style="color:var(--ink-soft);font-weight:600">Dołącz do katalogu i odbieraj zgłoszenia od opiekunów.</span></div>
+        <a class="btn btn-primary" href="#"><svg class="ic"><use href="#ic-bulb"/></svg> Dołącz jako specjalista</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0">
+      <span>© 2026 Psijaciel</span>
+      <span style="display:flex;gap:22px"><a href="#">Polityka prywatności</a><a href="#">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+<script src="listing.js"></script>
+<script>
+initListing({
+  center:[52.0, 19.3], zoom:6,
+  cats:{ separacja:'Lęk separacyjny', agresja:'Agresja i reaktywność', szczeniak:'Szczeniak i socjalizacja', nosework:'Nosework', obedience:'Obedience' },
+  catIcon:{ separacja:'ic-bulb', agresja:'ic-bulb', szczeniak:'ic-bulb', nosework:'ic-bulb', obedience:'ic-bulb' },
+  plural: n => { const d=n%10, s=n%100; if(n===1) return 'specjalista'; return (d>=2&&d<=4&&!(s>=12&&s<=14)) ? 'specjaliści' : 'specjalistów'; },
+  match: (i, c) => i.specSlugs.includes(c),
+  renderCard: b => {
+    const ini = b.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+    return `<div class="place spec" data-id="${b.id}">
+      <div class="spec-av">${ini}</div>
+      <div class="place-body">
+        <div class="place-head">
+          <div><div class="cat">${b.role}</div><h3>${b.name}</h3></div>
+          <span class="method"><svg class="ic"><use href="#ic-heart"/></svg> Metody pozytywne</span>
+        </div>
+        <div class="spec-tags">${b.specs.map(s=>`<span class="tag-sm">${s}</span>`).join('')}</div>
+        <div class="meta">
+          <span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> ${b.rating}</span>
+          <span><svg class="ic"><use href="#ic-pin"/></svg> ${b.online ? 'Online · '+b.city : b.city}</span>
+          <span class="price"><svg class="ic"><use href="#ic-chart"/></svg> od <b>${b.price}</b></span>
+          <span><svg class="ic"><use href="#ic-clock"/></svg> Termin: ${b.term}</span>
+        </div>
+        <a class="btn btn-primary btn-sm contact" href="#" onclick="event.stopPropagation()">Opisz problem</a>
+      </div>
+    </div>`;
+  },
+  items:[
+    { id:1, name:'Anna Kowalska', role:'Behawiorystka', specs:['Lęk separacyjny','Agresja'], specSlugs:['separacja','agresja'], city:'Warszawa', online:true,  price:'180 zł', rating:'4.9', term:'12 sie', cat:'separacja', lat:52.2297, lng:21.0122 },
+    { id:2, name:'Marek Nowak', role:'Trener', specs:['Szczeniak','Obedience'], specSlugs:['szczeniak','obedience'], city:'Kraków', online:false, price:'120 zł', rating:'4.8', term:'8 sie', cat:'szczeniak', lat:50.0647, lng:19.9450 },
+    { id:3, name:'Ewa Wiśniewska', role:'Behawiorystka', specs:['Agresja','Lęk separacyjny'], specSlugs:['agresja','separacja'], city:'Wrocław', online:true, price:'200 zł', rating:'5.0', term:'20 sie', cat:'agresja', lat:51.1079, lng:17.0385 },
+    { id:4, name:'Tomasz Zając', role:'Trener', specs:['Nosework','Obedience'], specSlugs:['nosework','obedience'], city:'Gdańsk', online:false, price:'110 zł', rating:'4.7', term:'9 sie', cat:'nosework', lat:54.3520, lng:18.6466 },
+    { id:5, name:'Kaja Wiśniewska', role:'Behawiorystka', specs:['Szczeniak','Lęk separacyjny'], specSlugs:['szczeniak','separacja'], city:'Poznań', online:true, price:'160 zł', rating:'4.9', term:'11 sie', cat:'szczeniak', lat:52.4064, lng:16.9252 },
+    { id:6, name:'Piotr Lewandowski', role:'Trener', specs:['Obedience','Agresja'], specSlugs:['obedience','agresja'], city:'Katowice', online:false, price:'130 zł', rating:'4.6', term:'15 sie', cat:'obedience', lat:50.2649, lng:19.0238 },
+    { id:7, name:'Zofia Dąbrowska', role:'Behawiorystka', specs:['Lęk separacyjny','Szczeniak'], specSlugs:['separacja','szczeniak'], city:'Łódź', online:true, price:'170 zł', rating:'4.8', term:'13 sie', cat:'separacja', lat:51.7592, lng:19.4560 }
+  ]
+});
+</script>
+</body>
+</html>

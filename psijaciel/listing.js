@@ -46,7 +46,7 @@ function initListing(cfg){
   }
   const card = cfg.renderCard || defaultCard;
 
-  function filtered(){ return cfg.items.filter(i => state.cat==='all' || i.cat===state.cat); }
+  function filtered(){ return cfg.items.filter(i => state.cat==='all' || (cfg.match ? cfg.match(i, state.cat) : i.cat===state.cat)); }
 
   function select(id, fromMap){
     activeId = id;
