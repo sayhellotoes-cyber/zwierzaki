@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Miejsca przyjazne psom w Warszawie — wybiegi, kawiarnie, weterynarze | Psijaciel</title>
+<meta name="description" content="Katalog miejsc przyjaznych psom w Warszawie: wybiegi, kawiarnie, weterynarze 24h, grooming, sklepy i tereny zielone. Lista i mapa, z odznaką weryfikacji.">
+<link rel="canonical" href="https://psijaciel.pl/miejsca/warszawa">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#FBF5EC">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Psijaciel">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Miejsca przyjazne psom w Warszawie | Psijaciel">
+<meta property="og:description" content="Wybiegi, kawiarnie, weterynarze 24h, grooming i więcej — lista i mapa.">
+<meta property="og:url" content="https://psijaciel.pl/miejsca/warszawa">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<nav class="site" aria-label="Nawigacja główna">
+  <div class="wrap">
+    <a class="logo wm" href="index.html" aria-label="Psijaciel — strona główna"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <div class="navlinks">
+      <a href="konfigurator.html">Konfigurator ras</a>
+      <a href="miejsca.html" class="active">Miejsca</a>
+      <a href="noclegi.html">Noclegi</a>
+      <div class="hasmenu">
+        <button aria-haspopup="true" aria-expanded="false">Specjaliści <span aria-hidden="true">▾</span></button>
+        <div class="menu" role="menu">
+          <a href="behawiorysci.html"><svg class="ic"><use href="#ic-bulb"/></svg><span><b>Behawioryści i trenerzy</b><span>Lęk, agresja, szczeniak, szkolenie</span></span></a>
+          <a href="hodowcy.html"><svg class="ic"><use href="#ic-bone"/></svg><span><b>Hodowcy</b><span>Odpowiedzialne hodowle z weryfikacją</span></span></a>
+        </div>
+      </div>
+      <a href="artykuly.html">Artykuły</a>
+      <a href="kursy.html">Kursy</a>
+      <a href="konto.html" class="mobile-only">Konto</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="section" style="padding:34px 0 60px">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Okruszki" style="margin-bottom:14px"><a href="index.html">Strona główna</a><span class="sep">/</span>Miejsca<span class="sep">/</span>Warszawa</nav>
+
+      <div class="listing-top">
+        <div>
+          <h1>Miejsca przyjazne psom</h1>
+          <span class="count" id="count">…</span>
+        </div>
+        <div class="city-row">
+          <button class="city-pill"><svg class="ic"><use href="#ic-pin"/></svg> Warszawa <span aria-hidden="true">▾</span></button>
+          <button class="btn btn-outline btn-sm" id="near"><svg class="ic"><use href="#ic-target"/></svg> W pobliżu</button>
+        </div>
+      </div>
+
+      <div class="listing-filters">
+        <button class="filter-pill active" data-cat="all">Wszystkie</button>
+        <button class="filter-pill" data-cat="wybiegi">Wybiegi</button>
+        <button class="filter-pill" data-cat="kawiarnie">Kawiarnie i restauracje</button>
+        <button class="filter-pill" data-cat="weterynarze">Weterynarze</button>
+        <button class="filter-pill" data-cat="grooming">Grooming</button>
+        <button class="filter-pill" data-cat="sklepy">Sklepy</button>
+        <button class="filter-pill" data-cat="szkolenia">Szkolenia</button>
+        <button class="filter-pill" data-cat="rehabilitacja">Rehabilitacja</button>
+        <button class="filter-pill" data-cat="hotele">Hotele dla psów</button>
+        <button class="filter-pill" data-cat="zielone">Tereny zielone</button>
+      </div>
+
+      <div class="map-toggle">
+        <button data-v="list" class="active">Lista</button>
+        <button data-v="map">Mapa</button>
+      </div>
+
+      <div class="listing show-list">
+        <div class="listing-list" id="list"></div>
+        <div class="listing-map"><div id="map"></div></div>
+      </div>
+
+      <div class="listing-cta">
+        <div><b>Znasz miejsce, którego tu brakuje?</b><br><span style="color:var(--ink-soft);font-weight:600">Zgłoś je — po weryfikacji dodamy je do mapy.</span></div>
+        <a class="btn btn-primary" href="#"><svg class="ic"><use href="#ic-pin"/></svg> Zgłoś miejsce</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0">
+      <span>© 2026 Psijaciel</span>
+      <span style="display:flex;gap:22px"><a href="#">Polityka prywatności</a><a href="#">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+<script src="listing.js"></script>
+<script>
+initListing({
+  center:[52.232, 21.010], zoom:11,
+  cats:{ wybiegi:'Wybiegi', kawiarnie:'Kawiarnie i restauracje', weterynarze:'Weterynarze', grooming:'Grooming',
+         sklepy:'Sklepy', szkolenia:'Szkolenia', rehabilitacja:'Rehabilitacja', hotele:'Hotele dla psów', zielone:'Tereny zielone' },
+  catIcon:{ wybiegi:'ic-paw', kawiarnie:'ic-heart', weterynarze:'ic-vet', grooming:'ic-star', sklepy:'ic-bone',
+            szkolenia:'ic-cap', rehabilitacja:'ic-shield', hotele:'ic-bed', zielone:'ic-leaf' },
+  items:[
+    { id:1,  name:'Wybieg Pole Mokotowskie', cat:'wybiegi', district:'Ochota', rating:'4.7', hours:'całodobowo', verified:true,  note:'Duży ogrodzony wybieg, 3 strefy wg wielkości psa.', lat:52.2119, lng:21.0028 },
+    { id:2,  name:'Kawiarnia Psia Kość', cat:'kawiarnie', district:'Śródmieście', rating:'4.8', hours:'8:00–20:00', verified:true, note:'Miska wody i przysmaki dla psa przy wejściu.', lat:52.2297, lng:21.0180 },
+    { id:3,  name:'Przychodnia Wet-Med 24h', cat:'weterynarze', district:'Mokotów', rating:'4.6', hours:'całodobowo', verified:true, h24:true, note:'Dyżur nocny i pogotowie weterynaryjne.', lat:52.1936, lng:21.0410 },
+    { id:4,  name:'Salon Kudłacz', cat:'grooming', district:'Wola', rating:'4.9', hours:'9:00–18:00', verified:false, note:'Strzyżenie ras długowłosych, kąpiele pielęgnacyjne.', lat:52.2360, lng:20.9840 },
+    { id:5,  name:'ZooMarket Ursynów', cat:'sklepy', district:'Ursynów', rating:'4.5', hours:'9:00–21:00', verified:false, note:'Karmy bytowe i weterynaryjne, akcesoria.', lat:52.1500, lng:21.0450 },
+    { id:6,  name:'Szkoła Psów Dobry Start', cat:'szkolenia', district:'Żoliborz', rating:'4.9', hours:'wg zapisów', verified:true, note:'Metody pozytywne, zajęcia grupowe i indywidualne.', lat:52.2680, lng:20.9820 },
+    { id:7,  name:'Park Skaryszewski', cat:'zielone', district:'Praga-Południe', rating:'4.8', hours:'całodobowo', verified:true, note:'Rozległe tereny na długie spacery (psy na smyczy).', lat:52.2450, lng:21.0530 },
+    { id:8,  name:'PetReha — rehabilitacja', cat:'rehabilitacja', district:'Bielany', rating:'5.0', hours:'8:00–19:00', verified:true, note:'Hydroterapia i fizjoterapia po kontuzjach.', lat:52.2900, lng:20.9500 },
+    { id:9,  name:'Dog Hotel Wilanów', cat:'hotele', district:'Wilanów', rating:'4.7', hours:'całodobowo', verified:false, note:'Opieka dzienna i nocna, wybieg na terenie.', lat:52.1650, lng:21.0900 },
+    { id:10, name:'Kawiarnia Łapa w Łapę', cat:'kawiarnie', district:'Praga-Północ', rating:'4.6', hours:'9:00–19:00', verified:false, note:'Pies mile widziany w środku, także zimą.', lat:52.2560, lng:21.0350 },
+    { id:11, name:'Wybieg Park Szczęśliwicki', cat:'wybiegi', district:'Ochota', rating:'4.5', hours:'całodobowo', verified:false, note:'Ogrodzony wybieg przy górce, dużo przestrzeni.', lat:52.2050, lng:20.9750 }
+  ]
+});
+</script>
+</body>
+</html>
