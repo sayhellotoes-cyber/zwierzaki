@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psijaciel — logo (kierunek C)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF5EC;--cream-deep:#F3EADB;--surface:#FFFFFF;
+  --ink:#38291C;--ink-soft:#77685A;--ink-faint:#AC9C8B;
+  --clay:#CE6B47;--clay-deep:#B4562F;--clay-tint:#F6E5DB;
+  --pine:#2E645A;--pine-deep:#234C44;--pine-tint:#E4EDEA;--sand:#E2B482;
+  --line:rgba(56,41,28,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+header{padding:60px 0 10px}
+.kicker{font-family:'Baloo 2';font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay-deep)}
+h1{font-family:'Baloo 2';font-weight:800;font-size:40px;margin:8px 0 8px}
+.sub{color:var(--ink-soft);font-weight:600;max-width:620px}
+h2{font-family:'Baloo 2';font-weight:800;font-size:22px;margin:0 0 4px}
+.sec{margin:40px 0}
+.note{color:var(--ink-soft);font-weight:600;font-size:14px;margin-bottom:16px}
+
+/* ---- WORDMARK ---- */
+.wm{font-family:'Baloo 2';font-weight:800;letter-spacing:-.02em;line-height:1;display:inline-flex;align-items:baseline;white-space:nowrap}
+.wm .psi{color:var(--clay)}
+.wm .rest{color:var(--ink)}
+.ti{position:relative;display:inline-block}
+.tp{position:absolute;bottom:var(--pb,.72em);width:var(--pw,.46em);height:var(--pw,.46em);left:50%}
+.tp.l{fill:var(--clay);transform:translateX(-54%) rotate(-7deg)}
+.tp.r{fill:var(--ink);transform:translateX(-46%) scaleX(-1) rotate(-7deg)}
+.wm.mono .psi,.wm.mono .rest{color:var(--ink)}
+.wm.mono .tp.l,.wm.mono .tp.r{fill:var(--ink)}
+.wm.creamAll .psi,.wm.creamAll .rest{color:var(--cream)}
+.wm.creamAll .tp.l,.wm.creamAll .tp.r{fill:var(--cream)}
+.wm.rev .psi{color:var(--sand)}
+.wm.rev .rest{color:var(--cream)}
+.wm.rev .tp.l{fill:var(--sand)}
+.wm.rev .tp.r{fill:var(--cream)}
+
+.hero{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:74px 40px;display:flex;justify-content:center;box-shadow:0 22px 50px -34px rgba(56,41,28,.5)}
+.hero .wm{font-size:104px}
+
+/* ---- variant tiles ---- */
+.grid{display:flex;gap:16px;flex-wrap:wrap}
+.tile{flex:1;min-width:210px;border:1px solid var(--line);border-radius:18px;padding:34px 24px;display:flex;flex-direction:column;align-items:center;gap:18px;justify-content:center;min-height:150px}
+.tile .lab{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.tile.onwhite{background:var(--surface)}
+.tile.onpine{background:var(--pine);border-color:transparent}
+.tile.onink{background:var(--ink);border-color:transparent}
+.tile.onpine .lab,.tile.onink .lab{color:rgba(255,255,255,.55)}
+
+/* ---- mark / favicon ---- */
+.mark{border-radius:26%;display:grid;place-items:center;background:var(--clay);box-shadow:0 12px 26px -16px rgba(56,41,28,.55)}
+.mark svg{fill:var(--cream)}
+.markrow{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.fv{display:flex;flex-direction:column;align-items:center;gap:8px}
+.fv .lab{font-size:11px;font-weight:700;color:var(--ink-faint)}
+
+/* clearspace */
+.clear{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:40px;display:flex;justify-content:center}
+.cbox{position:relative;padding:34px 30px;outline:2px dashed var(--clay);outline-offset:0}
+.cbox .wm{font-size:56px}
+
+/* misuse */
+.dont{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;min-height:120px;justify-content:center}
+.dont .lab{font-size:12px;font-weight:700;color:var(--clay-deep)}
+.dont .x{position:absolute;top:8px;right:10px;color:var(--clay-deep);font-weight:800}
+
+/* palette + code */
+.pal{display:flex;gap:10px;flex-wrap:wrap}
+.sw{display:flex;flex-direction:column;gap:6px;align-items:center;font-size:11px;font-weight:700;color:var(--ink-soft)}
+.sw i{width:52px;height:52px;border-radius:12px;border:1px solid var(--line);display:block}
+pre{background:var(--ink);color:#f4e9dd;border-radius:16px;padding:22px;overflow:auto;font-size:12.5px;line-height:1.55;font-family:ui-monospace,Menlo,monospace}
+pre .c{color:#c79f86}
+footer{padding:24px 0 80px;color:var(--ink-soft);font-weight:600;font-size:14px}
+</style>
+</head>
+<body>
+
+<!-- paw symbol (reused everywhere) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+
+<header class="wrap">
+  <div class="kicker">Psijaciel · logo · kierunek C</div>
+  <h1>Wordmark z puentą</h1>
+  <p class="sub"><b style="color:var(--clay)">Psi</b> (glina) + <b>jaciel</b> (atrament) = <i>pies + przyjaciel</i>. Dwie lustrzane łapki zamiast kropek nad „i" oraz „j". Znak (łapka) działa jako favicon/app-ikona.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="sec">
+    <div class="hero">
+      <span class="wm"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span>
+    </div>
+  </div>
+
+  <!-- VARIANTS -->
+  <div class="sec">
+    <h2>Warianty koloru</h2>
+    <p class="note">Podstawowy (dwukolor) na jasnym; mono do dokumentów; rewers na ciemnym tle.</p>
+    <div class="grid">
+      <div class="tile onwhite"><span class="wm" style="font-size:36px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span><span class="lab">Podstawowy</span></div>
+      <div class="tile onwhite"><span class="wm mono" style="font-size:36px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span><span class="lab">Mono · atrament</span></div>
+      <div class="tile onpine"><span class="wm rev" style="font-size:36px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span><span class="lab">Rewers · na sośnie</span></div>
+      <div class="tile onink"><span class="wm creamAll" style="font-size:36px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span><span class="lab">Mono krem · na atramencie</span></div>
+    </div>
+  </div>
+
+  <!-- MARK / FAVICON -->
+  <div class="sec">
+    <h2>Znak / favicon / app-ikona</h2>
+    <p class="note">Łapka (ta sama, co nad „i") na kaflu gliny — spójne „ziarno" marki tam, gdzie wordmark się nie zmieści.</p>
+    <div class="clear" style="justify-content:flex-start;gap:26px">
+      <div class="markrow">
+        <div class="fv"><div class="mark" style="width:96px;height:96px"><svg width="58" height="58"><use href="#paw"/></svg></div><span class="lab">96 px</span></div>
+        <div class="fv"><div class="mark" style="width:56px;height:56px"><svg width="34" height="34"><use href="#paw"/></svg></div><span class="lab">32 px</span></div>
+        <div class="fv"><div class="mark" style="width:32px;height:32px;border-radius:30%"><svg width="20" height="20"><use href="#paw"/></svg></div><span class="lab">16 px</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEARSPACE -->
+  <div class="sec">
+    <h2>Pole ochronne i minimalny rozmiar</h2>
+    <p class="note">Margines wokół = wysokość łapki. Min. szerokość wordmarku: 96 px (ekran) / 24 mm (druk). Poniżej — używaj samego znaku.</p>
+    <div class="clear">
+      <div class="cbox"><span class="wm"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span></div>
+    </div>
+  </div>
+
+  <!-- MISUSE -->
+  <div class="sec">
+    <h2>Czego nie robić</h2>
+    <div class="grid">
+      <div class="dont"><span class="x">✕</span><span class="wm" style="font-size:26px;transform:scaleY(1.6)"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span><span class="lab">nie rozciągaj</span></div>
+      <div class="dont"><span class="x">✕</span><span class="wm" style="font-size:26px"><span class="rest" style="color:var(--pine)">Psi</span><span class="psi" style="color:var(--sand)">jaciel</span></span><span class="lab">nie zmieniaj kolorów</span></div>
+      <div class="dont" style="background:var(--sand)"><span class="x">✕</span><span class="wm mono" style="font-size:26px;color:var(--ink)"><span class="psi">Psi</span><span class="rest">jaciel</span></span><span class="lab">nie kładź na krzykliwym tle</span></div>
+    </div>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="sec">
+    <h2>Kolory logo</h2>
+    <div class="pal">
+      <div class="sw"><i style="background:#CE6B47"></i>clay #CE6B47</div>
+      <div class="sw"><i style="background:#38291C"></i>ink #38291C</div>
+      <div class="sw"><i style="background:#E2B482"></i>sand #E2B482</div>
+      <div class="sw"><i style="background:#FBF5EC"></i>cream #FBF5EC</div>
+      <div class="sw"><i style="background:#2E645A"></i>pine #2E645A</div>
+    </div>
+  </div>
+
+  <!-- DEV -->
+  <div class="sec">
+    <h2>Dla developerów</h2>
+    <p class="note">Wordmark to żywy tekst w Baloo 2 (strona i tak ładuje ten font) — skalowalny, dostępny, SEO-friendly. Łapki to jeden symbol SVG użyty przez &lt;use&gt;.</p>
+    <pre><span class="c">&lt;!-- litery bezkropkowe: ı (U+0131) oraz ȷ (U+0237); łapki jako &lt;use&gt; --&gt;</span>
+&lt;a class="wm" href="/"&gt;
+  &lt;span class="psi"&gt;Ps&lt;span class="ti"&gt;ı&lt;svg class="tp l"&gt;&lt;use href="#paw"/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="rest"&gt;&lt;span class="ti"&gt;ȷ&lt;svg class="tp r"&gt;&lt;use href="#paw"/&gt;&lt;/svg&gt;&lt;/span&gt;aciel&lt;/span&gt;
+&lt;/a&gt;
+
+<span class="c">/* .psi{color:#CE6B47} .rest{color:#38291C}
+   .tp{position:absolute;bottom:.72em;width:.46em;height:.46em;left:50%;fill:#CE6B47}
+   .tp.l{transform:translateX(-54%) rotate(-7deg)}
+   .tp.r{transform:translateX(-46%) scaleX(-1) rotate(-7deg)} /* lustro */</span></pre>
+  </div>
+
+</div>
+<footer class="wrap">Szkic finalny kierunku C (dwie lustrzane łapki). Po akceptacji: eksport favicon.svg + wersja outline SVG, podmiana „Zwierzaki"→„Psijaciel" w nagłówkach/stopkach, wpięcie do design systemu.</footer>
+</body>
+</html>
