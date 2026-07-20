@@ -120,7 +120,7 @@ function initListing(cfg){
 function initPlaceSearch(){
   const POPULAR = ['Warszawa','Kraków','Wrocław','Poznań','Gdańsk','Łódź','Katowice','Lublin','Szczecin','Bydgoszcz','Zakopane','Białystok'];
   document.querySelectorAll('.place-search').forEach(box => {
-    const input = box.querySelector('.ps-input'), dd = box.querySelector('.ps-dd');
+    const input = box.querySelector('input'), dd = box.querySelector('.ps-dd');
     if(!input || !dd) return;
     function draw(q){
       const query = (q || '').trim().toLowerCase();
@@ -138,3 +138,51 @@ function initPlaceSearch(){
   });
 }
 initPlaceSearch();
+
+/* Kalendarz — wybór zakresu dat (np. pole „Kiedy" w wyszukiwarce noclegów) */
+function initDatePicker(){
+  const MON = ['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
+  const MONF = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+  const DOW = ['pn','wt','śr','cz','pt','so','nd'];
+  document.querySelectorAll('.date-picker').forEach(box => {
+    const input = box.querySelector('input'), dd = box.querySelector('.cal-dd');
+    if(!input || !dd) return;
+    const today = new Date(); today.setHours(0,0,0,0);
+    let view = new Date(today.getFullYear(), today.getMonth(), 1);
+    let from = null, to = null;
+    input.readOnly = true; input.style.cursor = 'pointer';
+    const fmt = d => d.getDate() + ' ' + MON[d.getMonth()];
+    function setVal(){ input.value = from && to ? fmt(from)+' – '+fmt(to) : from ? fmt(from)+' – …' : ''; }
+    function draw(){
+      const y = view.getFullYear(), m = view.getMonth();
+      let h = `<div class="cal-head"><button type="button" class="cal-nav" data-nav="-1">‹</button><b>${MONF[m]} ${y}</b><button type="button" class="cal-nav" data-nav="1">›</button></div><div class="cal-grid">`;
+      DOW.forEach(d => h += `<div class="cal-dow">${d}</div>`);
+      let first = (new Date(y, m, 1).getDay() + 6) % 7;
+      const days = new Date(y, m+1, 0).getDate();
+      for(let i=0;i<first;i++) h += '<div></div>';
+      for(let d=1; d<=days; d++){
+        const cur = new Date(y, m, d); cur.setHours(0,0,0,0);
+        let cls = 'cal-day';
+        if(cur < today) cls += ' disabled';
+        else if(from && to){ if(+cur===+from) cls+=' range-start'; else if(+cur===+to) cls+=' range-end'; else if(cur>from && cur<to) cls+=' in-range'; }
+        else if(from && +cur===+from) cls += ' sel';
+        h += `<div class="${cls}" data-d="${d}">${d}</div>`;
+      }
+      dd.innerHTML = h + '</div>';
+      dd.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('mousedown', e => { e.preventDefault(); view.setMonth(view.getMonth()+parseInt(b.dataset.nav)); draw(); }));
+      dd.querySelectorAll('.cal-day[data-d]:not(.disabled)').forEach(el => el.addEventListener('mousedown', e => {
+        e.preventDefault();
+        const cur = new Date(view.getFullYear(), view.getMonth(), parseInt(el.dataset.d)); cur.setHours(0,0,0,0);
+        if(!from || (from && to)){ from = cur; to = null; }
+        else if(cur < from){ to = from; from = cur; }
+        else { to = cur; }
+        setVal(); draw();
+        if(from && to) setTimeout(() => { dd.hidden = true; }, 180);
+      }));
+    }
+    input.addEventListener('focus', () => { draw(); dd.hidden = false; });
+    input.addEventListener('click', () => { draw(); dd.hidden = false; });
+    document.addEventListener('click', e => { if(!box.contains(e.target)) dd.hidden = true; });
+  });
+}
+initDatePicker();
