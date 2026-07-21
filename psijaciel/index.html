@@ -60,12 +60,18 @@
       <a href="konto.html" class="mobile-only">Konto</a>
     </div>
 
+    <div class="nav-search">
+      <div class="ns-field"><svg class="ic"><use href="#ic-search"/></svg><input type="text" class="ns-input" autocomplete="off" aria-label="Szukaj w Psijacielu" placeholder="Szukaj ras, miejsc, artykułów, kursów…"></div>
+      <button class="ns-close" aria-label="Zamknij wyszukiwarkę" onclick="closeSearch()"><svg class="ic"><use href="#ic-arrow"/></svg></button>
+    </div>
     <div class="nav-actions">
-      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <button class="icon-btn nav-search-btn" aria-label="Szukaj" onclick="openSearch()"><svg class="ic"><use href="#ic-search"/></svg></button>
+      <button class="btn btn-ghost btn-sm desktop-only ns-trigger" onclick="openSearch()">Szukaj</button>
       <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
       <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
     </div>
   </div>
+  <div class="ns-dd" hidden></div>
 </nav>
 
 <main>
@@ -90,7 +96,7 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="img/dog-hero-border-collie.jpg" alt="Uśmiechnięty pies na spacerze">
+      <img src="img/hero-osoba-z-psem.jpg" alt="Kobieta przytulająca psa na spacerze o zachodzie słońca">
       <div class="hero-badge"><span class="dot"><svg class="ic solid"><use href="#ic-paw"/></svg></span><span>Dopasowanie rasy<br>w 3 minuty</span></div>
     </div>
   </div>

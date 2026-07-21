@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twoje konto | Psijaciel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FBF5EC">
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<nav class="site" aria-label="Nawigacja główna">
+  <div class="wrap">
+    <a class="logo wm" href="index.html" aria-label="Psijaciel — strona główna"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <div class="navlinks">
+      <a href="konfigurator.html">Konfigurator ras</a><a href="miejsca.html">Miejsca</a><a href="noclegi.html">Noclegi</a>
+      <div class="hasmenu"><button aria-haspopup="true">Specjaliści <span aria-hidden="true">▾</span></button>
+        <div class="menu" role="menu">
+          <a href="behawiorysci.html"><svg class="ic"><use href="#ic-bulb"/></svg><span><b>Behawioryści i trenerzy</b><span>Lęk, agresja, szczeniak, szkolenie</span></span></a>
+          <a href="hodowcy.html"><svg class="ic"><use href="#ic-bone"/></svg><span><b>Hodowcy</b><span>Odpowiedzialne hodowle z weryfikacją</span></span></a>
+        </div></div>
+      <a href="artykuly.html">Artykuły</a><a href="kursy.html">Kursy</a>
+    </div>
+    <div class="nav-search">
+      <div class="ns-field"><svg class="ic"><use href="#ic-search"/></svg><input type="text" class="ns-input" autocomplete="off" aria-label="Szukaj w Psijacielu" placeholder="Szukaj ras, miejsc, artykułów, kursów…"></div>
+      <button class="ns-close" aria-label="Zamknij wyszukiwarkę" onclick="closeSearch()"><svg class="ic"><use href="#ic-arrow"/></svg></button>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn nav-search-btn" aria-label="Szukaj" onclick="openSearch()"><svg class="ic"><use href="#ic-search"/></svg></button>
+      <button class="btn btn-ghost btn-sm desktop-only ns-trigger" onclick="openSearch()">Szukaj</button>
+      <a class="btn btn-primary btn-sm desktop-only" href="panel.html">Konto</a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="ns-dd" hidden></div>
+</nav>
+
+<main class="account">
+  <div class="wrap">
+    <div class="acc-head">
+      <h1>Twoje konto</h1>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <span class="who"><svg class="ic solid"><use href="#ic-paw"/></svg> Kacper · Ziomek</span>
+        <a class="btn btn-outline btn-sm" href="konto.html">Wyloguj</a>
+      </div>
+    </div>
+
+    <div class="acc-grid">
+      <nav class="acc-nav" aria-label="Menu konta">
+        <a href="#profil" class="active"><svg class="ic"><use href="#ic-paw"/></svg> Profil psa</a>
+        <a href="#zapisane"><svg class="ic"><use href="#ic-heart"/></svg> Zapisane</a>
+        <a href="#kursy"><svg class="ic"><use href="#ic-cap"/></svg> Moje kursy</a>
+        <div class="sep"></div>
+        <a href="#ustawienia"><svg class="ic"><use href="#ic-user"/></svg> Ustawienia</a>
+        <a href="konto.html"><svg class="ic"><use href="#ic-lock"/></svg> Wyloguj</a>
+      </nav>
+
+      <div class="acc-content">
+        <!-- PROFIL PSA -->
+        <section class="acc-section" id="profil">
+          <h2>Profil psa</h2>
+          <p style="color:var(--ink-soft);font-weight:600;margin-bottom:16px">Dane psa napędzają personalizację — dobierzemy noclegi wg wagi i treści wg rasy.</p>
+          <div class="dogp">
+            <div class="dogp-top">
+              <div class="dogp-av"><img src="img/dog-hero-border-collie.jpg" alt="Ziomek"></div>
+              <div><b>Ziomek</b><span>Border collie · 2 lata</span></div>
+            </div>
+            <form class="dogp-form" onsubmit="return false">
+              <div class="form-row"><label>Imię psa</label><input class="input" type="text" value="Ziomek"></div>
+              <div class="form-row"><label>Status</label><br>
+                <span class="seg"><button type="button" class="on" onclick="seg(this)">Mam psa</button><button type="button" onclick="seg(this)">Szukam rasy</button></span>
+              </div>
+              <div class="form-row"><label>Rasa</label><select class="input"><option>Border collie</option><option>Labrador retriever</option><option>Golden retriever</option><option>Kundelek / mieszaniec</option><option>Nie wiem — szukam rasy</option></select></div>
+              <div class="form-row"><label>Wiek</label><input class="input" type="text" value="2 lata"></div>
+              <div class="form-row"><label>Waga</label><input class="input" type="text" value="18 kg"></div>
+              <div class="form-row"><label>Płeć</label><select class="input"><option>Samiec</option><option>Samica</option></select></div>
+              <div class="form-row full" style="display:flex;justify-content:flex-end;margin-top:6px"><button class="btn btn-primary" type="submit">Zapisz zmiany</button></div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ZAPISANE -->
+        <section class="acc-section" id="zapisane">
+          <h2>Zapisane</h2>
+          <div class="saved-tabs">
+            <button class="filter-pill active" onclick="showTab(this,'sv-miejsca')">Miejsca</button>
+            <button class="filter-pill" onclick="showTab(this,'sv-noclegi')">Noclegi</button>
+            <button class="filter-pill" onclick="showTab(this,'sv-artykuly')">Artykuły</button>
+            <button class="filter-pill" onclick="showTab(this,'sv-wyniki')">Wyniki testu</button>
+          </div>
+
+          <div class="saved-panel" id="sv-miejsca">
+            <div class="mini-grid">
+              <a class="place" href="miejsca.html"><div class="place-thumb"><svg class="ic ic-lg"><use href="#ic-paw"/></svg></div><div class="place-body"><div class="cat">Wybiegi</div><h3>Wybieg Pole Mokotowskie</h3><div class="meta"><span><svg class="ic"><use href="#ic-pin"/></svg> Ochota</span><span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> Zweryfikowane</span></div></div></a>
+              <a class="place" href="miejsca.html"><div class="place-thumb"><svg class="ic ic-lg"><use href="#ic-heart"/></svg></div><div class="place-body"><div class="cat">Kawiarnie</div><h3>Kawiarnia Psia Kość</h3><div class="meta"><span><svg class="ic"><use href="#ic-pin"/></svg> Śródmieście</span><span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> 4.8</span></div></div></a>
+            </div>
+          </div>
+          <div class="saved-panel" id="sv-noclegi" hidden>
+            <div class="mini-grid">
+              <a class="place" href="nocleg.html"><div class="place-thumb" style="overflow:hidden"><img src="img/art-hodowca.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="place-body"><div class="cat">Nocleg</div><h3>Chata pod Reglami</h3><div class="meta"><span><svg class="ic"><use href="#ic-pin"/></svg> Tatry · Zakopane</span><span>od 320 zł/noc</span></div></div></a>
+            </div>
+          </div>
+          <div class="saved-panel" id="sv-artykuly" hidden>
+            <div class="mini-grid">
+              <a class="article-card" href="artykul.html"><div class="article-thumb"><img src="img/dog-hero-border-collie.jpg" alt=""><span class="tag">Rasy A–Z</span></div><div class="article-body"><h3>Border collie — charakter i potrzeby</h3><span class="more">Czytaj <svg class="ic"><use href="#ic-arrow"/></svg></span></div></a>
+              <a class="article-card" href="artykul.html"><div class="article-thumb"><img src="img/art-nuda.jpg" alt=""><span class="tag">Wychowanie</span></div><div class="article-body"><h3>5 sygnałów, że pies się nudzi</h3><span class="more">Czytaj <svg class="ic"><use href="#ic-arrow"/></svg></span></div></a>
+            </div>
+          </div>
+          <div class="saved-panel" id="sv-wyniki" hidden>
+            <div class="result-mini">
+              <span class="pct">92%</span>
+              <div style="flex:1"><b>Border collie</b><span>Twój najlepszy wynik z konfiguratora · 12 lipca</span></div>
+              <a class="btn btn-soft btn-sm" href="konfigurator.html">Zobacz raport</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- MOJE KURSY -->
+        <section class="acc-section" id="kursy">
+          <h2>Moje kursy</h2>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="mycourse">
+              <img src="img/art-dzieci.jpg" alt="">
+              <div class="mc-body">
+                <b>Pierwsze 30 dni ze szczeniakiem</b>
+                <div class="pbar"><i style="width:45%"></i></div>
+                <div class="pmeta">Ukończono 6 z 13 lekcji</div>
+              </div>
+              <a class="btn btn-primary btn-sm" href="kurs.html">Kontynuuj</a>
+            </div>
+            <div class="mycourse">
+              <img src="img/art-hodowca.jpg" alt="">
+              <div class="mc-body">
+                <b>Zanim kupisz psa</b>
+                <div class="pbar"><i style="width:100%"></i></div>
+                <div class="pmeta"><svg class="ic" style="color:var(--pine);vertical-align:-2px"><use href="#ic-check"/></svg> Ukończony · certyfikat gotowy</div>
+              </div>
+              <a class="btn btn-soft btn-sm" href="kurs.html">Powtórz</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- USTAWIENIA -->
+        <section class="acc-section" id="ustawienia">
+          <h2>Ustawienia</h2>
+          <div class="dogp">
+            <div class="info-list">
+              <div class="row"><span class="k"><svg class="ic"><use href="#ic-user"/></svg> E-mail</span><b>kacper@przyklad.pl</b></div>
+              <div class="row"><span class="k"><svg class="ic"><use href="#ic-bulb"/></svg> Newsletter i poradniki</span><b>Włączone</b></div>
+              <div class="row"><span class="k"><svg class="ic"><use href="#ic-pin"/></svg> Twoja okolica</span><b>Warszawa</b></div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+              <a class="btn btn-outline btn-sm" href="konto.html">Wyloguj</a>
+              <button class="btn btn-ghost btn-sm" style="color:var(--clay-deep)">Usuń konto</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap"><div class="foot-bottom" style="border:none;padding-top:0"><span>© 2026 Psijaciel</span><span style="display:flex;gap:22px"><a href="#">Polityka prywatności</a><a href="#">Regulamin</a></span></div></div></footer>
+<script src="script.js"></script>
+<script>
+function showTab(btn, id){
+  document.querySelectorAll('.saved-tabs .filter-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.saved-panel').forEach(p=>p.hidden = (p.id !== id));
+}
+function seg(btn){ btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
+document.querySelectorAll('.acc-nav a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{
+  document.querySelectorAll('.acc-nav a').forEach(x=>x.classList.remove('active')); a.classList.add('active');
+}));
+</script>
+</body>
+</html>

@@ -38,12 +38,18 @@
         </div></div>
       <a href="artykuly.html">Artykuły</a><a href="kursy.html">Kursy</a><a href="konto.html" class="mobile-only">Konto</a>
     </div>
+    <div class="nav-search">
+      <div class="ns-field"><svg class="ic"><use href="#ic-search"/></svg><input type="text" class="ns-input" autocomplete="off" aria-label="Szukaj w Psijacielu" placeholder="Szukaj ras, miejsc, artykułów, kursów…"></div>
+      <button class="ns-close" aria-label="Zamknij wyszukiwarkę" onclick="closeSearch()"><svg class="ic"><use href="#ic-arrow"/></svg></button>
+    </div>
     <div class="nav-actions">
-      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <button class="icon-btn nav-search-btn" aria-label="Szukaj" onclick="openSearch()"><svg class="ic"><use href="#ic-search"/></svg></button>
+      <button class="btn btn-ghost btn-sm desktop-only ns-trigger" onclick="openSearch()">Szukaj</button>
       <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
       <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
     </div>
   </div>
+  <div class="ns-dd" hidden></div>
 </nav>
 
 <main class="profile">

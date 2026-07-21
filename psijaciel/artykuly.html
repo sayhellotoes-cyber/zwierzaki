@@ -60,12 +60,18 @@
       <a href="kursy.html">Kursy</a>
       <a href="konto.html" class="mobile-only">Konto</a>
     </div>
+    <div class="nav-search">
+      <div class="ns-field"><svg class="ic"><use href="#ic-search"/></svg><input type="text" class="ns-input" autocomplete="off" aria-label="Szukaj w Psijacielu" placeholder="Szukaj ras, miejsc, artykułów, kursów…"></div>
+      <button class="ns-close" aria-label="Zamknij wyszukiwarkę" onclick="closeSearch()"><svg class="ic"><use href="#ic-arrow"/></svg></button>
+    </div>
     <div class="nav-actions">
-      <a class="btn btn-ghost btn-sm desktop-only" href="szukaj.html">Szukaj</a>
+      <button class="icon-btn nav-search-btn" aria-label="Szukaj" onclick="openSearch()"><svg class="ic"><use href="#ic-search"/></svg></button>
+      <button class="btn btn-ghost btn-sm desktop-only ns-trigger" onclick="openSearch()">Szukaj</button>
       <a class="btn btn-primary btn-sm desktop-only" href="konto.html">Konto</a>
       <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
     </div>
   </div>
+  <div class="ns-dd" hidden></div>
 </nav>
 
 <main>
@@ -77,11 +83,6 @@
         <h1>Wiedza o psach, która pomaga decydować</h1>
         <p class="lead">Poradniki o wyborze rasy, zdrowiu, wychowaniu i podróżach — na każdym etapie wspólnego życia z psem.</p>
       </div>
-
-      <form class="hub-search" onsubmit="return false">
-        <input class="input" type="search" placeholder="Szukaj: rasa, zachowanie, koszty…" aria-label="Szukaj w bazie wiedzy">
-        <button class="btn btn-primary" type="submit"><svg class="ic"><use href="#ic-search"/></svg> Szukaj</button>
-      </form>
 
       <div class="filters">
         <button class="filter-pill active">Wszystkie</button>
