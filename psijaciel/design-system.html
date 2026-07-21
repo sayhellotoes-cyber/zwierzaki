@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psijaciel — Design System</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* chrome katalogu — tylko ta strona */
+.ds-top{position:sticky;top:0;z-index:60;background:rgba(251,245,236,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.ds-top .in{max-width:1080px;margin:0 auto;padding:0 32px;height:66px;display:flex;align-items:center;gap:16px}
+.ds-top .badge{margin-left:auto;font-family:var(--font-display);font-weight:700;font-size:12px;background:var(--clay-tint);color:var(--clay-deep);padding:6px 13px;border-radius:var(--r-pill)}
+.ds-shell{max-width:1080px;margin:0 auto;padding:0 32px 110px}
+.ds-hero{padding:52px 0 36px;border-bottom:1px solid var(--line)}
+.ds-hero h1{font-size:46px;font-weight:800}
+.ds-hero p{color:var(--ink-soft);font-size:18px;font-weight:600;max-width:640px;margin:12px 0 0}
+.ds-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.ds-toc a{font-family:var(--font-display);font-weight:600;font-size:13px;padding:7px 14px;border-radius:var(--r-pill);background:var(--surface);border:1px solid var(--line);color:var(--ink-soft)}
+.ds-toc a:hover{border-color:var(--clay);color:var(--clay-deep)}
+.ds-sec{padding:44px 0;border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.ds-sec>h2{font-size:30px;font-weight:800;display:flex;align-items:center;gap:12px}
+.ds-sec>h2 .n{font-family:var(--font-display);font-size:14px;font-weight:700;color:#fff;background:var(--clay);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ds-sub{font-family:var(--font-display);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-faint);margin:32px 0 15px}
+.ds-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+.ds-note{font-size:13.5px;color:var(--ink-soft);font-weight:600;background:var(--clay-tint);border-radius:var(--r-md);padding:14px 18px;margin-top:20px}
+.ds-note code,code.k{font-family:ui-monospace,Menlo,monospace;background:rgba(56,41,28,.1);padding:1px 6px;border-radius:5px;font-size:12.5px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.sw{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+.sw .chip{height:74px}
+.sw .meta{padding:10px 12px}
+.sw .nm{font-family:var(--font-display);font-weight:700;font-size:13.5px}
+.sw .vr,.sw .hx{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-soft)}
+.sw .hx{color:var(--ink-faint)}
+.spec-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.spec-box .cap{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-soft);text-align:center}
+.type-spec{border-bottom:1px dashed var(--line);padding:14px 0;display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.type-spec .cap{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--ink-faint);white-space:nowrap}
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px}
+.frame.cream{background:var(--cream-deep)}
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.icon-cell{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.icon-cell .ic{width:26px;height:26px;color:var(--ink)}
+.icon-cell .nm{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-soft)}
+.icon-cell .use{font-family:var(--font-display);font-weight:600;font-size:12px;color:var(--ink-faint)}
+.icon-cell.accent{background:var(--clay-tint)}.icon-cell.accent .ic{color:var(--clay-deep)}
+.icon-cell.dark{background:var(--pine-deep);border-color:transparent}.icon-cell.dark .ic{color:#fff}.icon-cell.dark .use{color:rgba(255,255,255,.7)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="paw" viewBox="0 0 24 24"><circle cx="6.6" cy="9" r="2.5"/><circle cx="12" cy="6.7" r="2.7"/><circle cx="17.4" cy="9" r="2.5"/><path d="M12 10.9c-3.7 0-6.6 2.6-6.6 5.7 0 2.7 3 4.4 6.6 4.4s6.6-1.7 6.6-4.4c0-3.1-2.9-5.7-6.6-5.7z"/></symbol></svg>
+<script src="icons.js"></script>
+
+<div class="ds-top">
+  <div class="in">
+    <a class="logo wm" href="index.html" style="font-size:24px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></a>
+    <span class="badge">Design System · v1.0</span>
+  </div>
+</div>
+
+<div class="ds-shell">
+  <header class="ds-hero">
+    <span class="eyebrow">Dokumentacja dla dev + design</span>
+    <h1>Design System „Psijaciel"</h1>
+    <p>Jedno źródło prawdy: tokeny, typografia i komponenty od atomów po organizmy. Wszystko żywe — dokładnie te klasy z <code class="k">styles.css</code>, których używają podstrony.</p>
+    <nav class="ds-toc">
+      <a href="#kolory">Kolory</a><a href="#typografia">Typografia</a><a href="#radii">Promienie · cienie</a>
+      <a href="#spacing">Odstępy</a><a href="#ikony">Ikony</a><a href="#logo">Logo</a><a href="#przyciski">Przyciski</a>
+      <a href="#badge">Etykiety · badge</a><a href="#formularze">Formularze · search</a><a href="#karty">Karty</a>
+      <a href="#bloki">Bloki treści</a><a href="#konfigurator">Konfigurator</a><a href="#konto">Konto</a><a href="#organizmy">Organizmy</a>
+    </nav>
+  </header>
+
+  <!-- KOLORY -->
+  <section class="ds-sec" id="kolory">
+    <h2><span class="n">A</span> Kolory</h2>
+    <div class="ds-sub">Tła i powierzchnie</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--cream)"></div><div class="meta"><div class="nm">Krem</div><div class="vr">--cream</div><div class="hx">#FBF5EC</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--cream-deep)"></div><div class="meta"><div class="nm">Krem głęboki</div><div class="vr">--cream-deep</div><div class="hx">#F3EADB</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface);border-bottom:1px solid var(--line)"></div><div class="meta"><div class="nm">Powierzchnia</div><div class="vr">--surface</div><div class="hx">#FFFFFF</div></div></div>
+    </div>
+    <div class="ds-sub">Atrament / tekst</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><div class="nm">Atrament</div><div class="vr">--ink</div><div class="hx">#38291C</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-soft)"></div><div class="meta"><div class="nm">Atrament miękki</div><div class="vr">--ink-soft</div><div class="hx">#77685A</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--ink-faint)"></div><div class="meta"><div class="nm">Atrament ledwy</div><div class="vr">--ink-faint</div><div class="hx">#AC9C8B</div></div></div>
+    </div>
+    <div class="ds-sub">Glina — akcent akcji / CTA</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--clay)"></div><div class="meta"><div class="nm">Glina</div><div class="vr">--clay</div><div class="hx">#CE6B47</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--clay-deep)"></div><div class="meta"><div class="nm">Glina głęboka</div><div class="vr">--clay-deep</div><div class="hx">#B4562F</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--clay-tint)"></div><div class="meta"><div class="nm">Glina jasna</div><div class="vr">--clay-tint</div><div class="hx">#F6E5DB</div></div></div>
+    </div>
+    <div class="ds-sub">Sosna — akcent zaufania · piasek</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--pine)"></div><div class="meta"><div class="nm">Sosna</div><div class="vr">--pine</div><div class="hx">#2E645A</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--pine-deep)"></div><div class="meta"><div class="nm">Sosna głęboka</div><div class="vr">--pine-deep</div><div class="hx">#234C44</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--pine-tint)"></div><div class="meta"><div class="nm">Sosna jasna</div><div class="vr">--pine-tint</div><div class="hx">#E4EDEA</div></div></div>
+      <div class="sw"><div class="chip" style="background:var(--sand)"></div><div class="meta"><div class="nm">Piasek</div><div class="vr">--sand</div><div class="hx">#E2B482</div></div></div>
+    </div>
+    <div class="ds-note">Reguła dwóch akcentów: <b>glina</b> = akcja/CTA i podświetlenia, <b>sosna</b> = zaufanie i weryfikacja. Maks. dwa akcenty na widok.</div>
+  </section>
+
+  <!-- TYPOGRAFIA -->
+  <section class="ds-sec" id="typografia">
+    <h2><span class="n">B</span> Typografia</h2>
+    <div class="ds-sub">Baloo 2 — nagłówki, etykiety (<code class="k">--font-display</code>)</div>
+    <div class="type-spec"><h1 style="font-size:56px">Pies, który pasuje</h1><span class="cap">Display · 56/800</span></div>
+    <div class="type-spec"><h2 style="font-size:40px">Towarzyszymy na każdym etapie</h2><span class="cap">H2 · 40/800</span></div>
+    <div class="type-spec"><h3 style="font-size:25px">Border collie</h3><span class="cap">H3 · 25/700</span></div>
+    <div class="type-spec"><span class="eyebrow">Eyebrow / etykieta</span><span class="cap">eyebrow · 13/700 · CAPS</span></div>
+    <div class="ds-sub">Nunito — tekst (<code class="k">--font-body</code>)</div>
+    <div class="type-spec"><p style="margin:0;max-width:560px">Dobieramy rasę do Twojego stylu życia, a potem towarzyszymy na co dzień — miejsca, wiedza, specjaliści i noclegi.</p><span class="cap">body · 15–19/500–600</span></div>
+    <div class="ds-note">Zaokrąglona, przyjazna <b>Baloo 2</b> w nagłówkach + czytelna, ciepła <b>Nunito</b> w tekście (bazowo waga 500–600).</div>
+  </section>
+
+  <!-- PROMIENIE I CIENIE -->
+  <section class="ds-sec" id="radii">
+    <h2><span class="n">C</span> Promienie i cienie</h2>
+    <div class="ds-sub">Promienie</div>
+    <div class="ds-row">
+      <div class="spec-box" style="width:150px"><div style="width:72px;height:48px;background:var(--clay-tint);border-radius:var(--r-xl)"></div><div class="cap">--r-xl · 32px</div></div>
+      <div class="spec-box" style="width:150px"><div style="width:72px;height:48px;background:var(--clay-tint);border-radius:var(--r-lg)"></div><div class="cap">--r-lg · 24px</div></div>
+      <div class="spec-box" style="width:150px"><div style="width:72px;height:48px;background:var(--clay-tint);border-radius:var(--r-md)"></div><div class="cap">--r-md · 16px</div></div>
+      <div class="spec-box" style="width:150px"><div style="width:72px;height:48px;background:var(--clay-tint);border-radius:var(--r-sm)"></div><div class="cap">--r-sm · 10px</div></div>
+      <div class="spec-box" style="width:150px"><div style="width:72px;height:48px;background:var(--clay-tint);border-radius:var(--r-pill)"></div><div class="cap">--r-pill · 100px</div></div>
+    </div>
+    <div class="ds-sub">Cienie</div>
+    <div class="ds-row">
+      <div class="spec-box cream" style="width:210px"><div style="width:120px;height:56px;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow-sm)"></div><div class="cap">--shadow-sm</div></div>
+      <div class="spec-box cream" style="width:210px"><div style="width:120px;height:56px;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow)"></div><div class="cap">--shadow</div></div>
+      <div class="spec-box cream" style="width:210px"><div style="width:120px;height:56px;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow-lg)"></div><div class="cap">--shadow-lg</div></div>
+    </div>
+  </section>
+
+  <!-- ODSTĘPY -->
+  <section class="ds-sec" id="spacing">
+    <h2><span class="n">D</span> Odstępy — skala 4px</h2>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:4px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">4px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:8px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">8px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:16px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">16px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:24px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">24px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:32px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">32px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:48px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">48px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:64px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">64px</span></div>
+      <div style="display:flex;align-items:center;gap:14px"><div style="height:16px;width:88px;background:var(--clay)"></div><span class="cap" style="font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-soft)">88px</span></div>
+    </div>
+  </section>
+
+  <!-- IKONY -->
+  <section class="ds-sec" id="ikony">
+    <h2><span class="n">E</span> Ikony</h2>
+    <p style="color:var(--ink-soft);font-weight:600;max-width:660px">Autorski set — kontur 24px, gruba zaokrąglona kreska w duchu łapki z logo. Wszystkie na <code class="k">currentColor</code>. Łapka jest wypełniona (klasa <code class="k">solid</code>).</p>
+    <div class="icon-grid" style="margin-top:16px">
+      <div class="icon-cell accent"><svg class="ic solid"><use href="#ic-paw"/></svg><span class="nm">ic-paw</span><span class="use">marka</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bolt"/></svg><span class="nm">ic-bolt</span><span class="use">aktywność</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-home"/></svg><span class="nm">ic-home</span><span class="use">dom</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-building"/></svg><span class="nm">ic-building</span><span class="use">mieszkanie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-cap"/></svg><span class="nm">ic-cap</span><span class="use">kurs / poziom</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-target"/></svg><span class="nm">ic-target</span><span class="use">dopasowanie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-compass"/></svg><span class="nm">ic-compass</span><span class="use">wiedza</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-chart"/></svg><span class="nm">ic-chart</span><span class="use">koszt / cena</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-refresh"/></svg><span class="nm">ic-refresh</span><span class="use">powtórz</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-shield"/></svg><span class="nm">ic-shield</span><span class="use">gwarancja</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bulb"/></svg><span class="nm">ic-bulb</span><span class="use">behawiorysta</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-suitcase"/></svg><span class="nm">ic-suitcase</span><span class="use">podróże</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-vet"/></svg><span class="nm">ic-vet</span><span class="use">weterynarz</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-pin"/></svg><span class="nm">ic-pin</span><span class="use">lokalizacja</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bone"/></svg><span class="nm">ic-bone</span><span class="use">rasa / hodowca</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-verified"/></svg><span class="nm">ic-verified</span><span class="use">zweryfikowano</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-check"/></svg><span class="nm">ic-check</span><span class="use">potwierdzenie</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-lock"/></svg><span class="nm">ic-lock</span><span class="use">prywatność</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-star"/></svg><span class="nm">ic-star</span><span class="use">ocena</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-heart"/></svg><span class="nm">ic-heart</span><span class="use">rodzina / ulubione</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-clock"/></svg><span class="nm">ic-clock</span><span class="use">czas / termin</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-download"/></svg><span class="nm">ic-download</span><span class="use">pobierz</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-share"/></svg><span class="nm">ic-share</span><span class="use">udostępnij</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-leaf"/></svg><span class="nm">ic-leaf</span><span class="use">natura</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-mountain"/></svg><span class="nm">ic-mountain</span><span class="use">wysoka energia</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-arrow"/></svg><span class="nm">ic-arrow</span><span class="use">CTA</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-search"/></svg><span class="nm">ic-search</span><span class="use">szukaj</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-user"/></svg><span class="nm">ic-user</span><span class="use">konto</span></div>
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bed"/></svg><span class="nm">ic-bed</span><span class="use">nocleg</span></div>
+    </div>
+    <div class="ds-sub">Kolor przejmowany z kontekstu</div>
+    <div class="icon-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="icon-cell"><svg class="ic"><use href="#ic-bone"/></svg><span class="use">atrament</span></div>
+      <div class="icon-cell accent"><svg class="ic"><use href="#ic-bone"/></svg><span class="use">glina</span></div>
+      <div class="icon-cell" style="background:var(--pine-tint)"><svg class="ic" style="color:var(--pine)"><use href="#ic-bone"/></svg><span class="use">sosna</span></div>
+      <div class="icon-cell dark"><svg class="ic"><use href="#ic-bone"/></svg><span class="use">na ciemnym</span></div>
+    </div>
+    <div class="ds-note">Użycie: <code>&lt;svg class="ic"&gt;&lt;use href="#ic-pin"/&gt;&lt;/svg&gt;</code>. Skaluje się z <code class="k">font-size</code> rodzica. Standalone SVG w <code class="k">icons/</code>.</div>
+  </section>
+
+  <!-- LOGO -->
+  <section class="ds-sec" id="logo">
+    <h2><span class="n">F</span> Logo · marka</h2>
+    <p style="color:var(--ink-soft);font-weight:600;max-width:660px">Wordmark „Ps<b style="color:var(--clay)">i</b>jaciel": <b style="color:var(--clay)">Psi</b> (glina) + <b>jaciel</b> (atrament), dwie lustrzane łapki nad „i" i „j". Klasa <code class="k">.wm</code> — żywy tekst w Baloo 2.</p>
+    <div class="g2" style="margin-top:16px">
+      <div class="frame" style="display:grid;place-items:center;padding:40px"><span class="wm" style="font-size:44px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span></div>
+      <div class="frame" style="display:grid;place-items:center;padding:40px;background:var(--pine)"><span class="wm on-dark" style="font-size:44px"><span class="psi">Ps<span class="ti">ı<svg class="tp l"><use href="#paw"/></svg></span></span><span class="rest"><span class="ti">ȷ<svg class="tp r"><use href="#paw"/></svg></span>aciel</span></span></div>
+    </div>
+    <div class="ds-note">Warianty, pole ochronne i favicon: patrz <code class="k">psijaciel-brand/logo-final.html</code>. Znak (łapka) = favicon/app-ikona.</div>
+  </section>
+
+  <!-- PRZYCISKI -->
+  <section class="ds-sec" id="przyciski">
+    <h2><span class="n">G</span> Przyciski</h2>
+    <div class="frame"><div class="ds-row" style="align-items:center">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-pine">Pine</button>
+      <button class="btn btn-soft">Soft</button>
+      <button class="btn btn-outline">Outline</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+    </div></div>
+    <div class="ds-sub">Z ikoną · pełna szerokość (btn-block)</div>
+    <div class="g2">
+      <div class="frame"><button class="btn btn-primary">Sprawdź dopasowanie <svg class="ic"><use href="#ic-arrow"/></svg></button></div>
+      <div class="frame"><button class="btn btn-primary btn-block btn-lg">Kup dostęp</button></div>
+    </div>
+  </section>
+
+  <!-- ETYKIETY / BADGE -->
+  <section class="ds-sec" id="badge">
+    <h2><span class="n">H</span> Etykiety · badge · chipsy</h2>
+    <div class="ds-sub">Statusy i zaufanie</div>
+    <div class="frame"><div class="ds-row" style="align-items:center">
+      <span class="eyebrow">Eyebrow</span>
+      <span class="tag">Wybór rasy</span>
+      <span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> Zweryfikowane</span>
+      <span class="badge24">24h</span>
+      <span class="litter avail">Dostępny miot</span>
+      <span class="litter plan">Planowany miot</span>
+      <span class="litter none">Brak miotów</span>
+      <span class="method"><svg class="ic"><use href="#ic-heart"/></svg> Metody pozytywne</span>
+    </div></div>
+    <div class="ds-sub">Chipsy · filtry · oceny</div>
+    <div class="frame"><div class="ds-row" style="align-items:center">
+      <span class="filter-pill">Wszystkie</span>
+      <span class="filter-pill active">Wybiegi</span>
+      <span class="chip">Kominek</span>
+      <span class="tag-sm">Lęk separacyjny</span>
+      <span class="dogchip"><svg class="ic"><use href="#ic-shield"/></svg> Ogrodzony teren</span>
+      <span class="cert"><svg class="ic"><use href="#ic-cap"/></svg> COAPE</span>
+      <span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> 4.9</span>
+    </div></div>
+  </section>
+
+  <!-- FORMULARZE / SEARCH -->
+  <section class="ds-sec" id="formularze">
+    <h2><span class="n">I</span> Formularze · wyszukiwarki</h2>
+    <div class="ds-sub">Pola</div>
+    <div class="g2">
+      <div class="frame"><div class="form-row"><label>Adres e-mail</label><input class="input" type="email" placeholder="ty@przyklad.pl"></div></div>
+      <div class="frame"><div class="form-row"><label>Wiadomość</label><textarea class="input" placeholder="Napisz…"></textarea></div></div>
+    </div>
+    <div class="ds-sub">Wyszukiwarka miejscowości (combobox, <code class="k">.place-search</code>)</div>
+    <div class="frame" style="overflow:visible">
+      <div class="place-search" style="max-width:280px">
+        <svg class="ic search-ic"><use href="#ic-search"/></svg>
+        <input class="ps-input" type="text" value="Warszawa" readonly>
+        <div class="ps-dd"><div class="ps-h">Popularne miasta</div><div class="ps-item"><svg class="ic"><use href="#ic-pin"/></svg> Kraków</div><div class="ps-item"><svg class="ic"><use href="#ic-pin"/></svg> Gdańsk</div><div class="ps-item"><svg class="ic"><use href="#ic-pin"/></svg> Wrocław</div></div>
+      </div>
+      <div style="height:150px"></div>
+    </div>
+    <div class="ds-sub">Kalendarz zakresu dat (<code class="k">.cal-dd</code>)</div>
+    <div class="frame" style="display:flex;justify-content:center">
+      <div class="cal-dd" style="position:static;box-shadow:none;border:1px solid var(--line)">
+        <div class="cal-head"><button class="cal-nav">‹</button><b>Sierpień 2026</b><button class="cal-nav">›</button></div>
+        <div class="cal-grid">
+          <div class="cal-dow">pn</div><div class="cal-dow">wt</div><div class="cal-dow">śr</div><div class="cal-dow">cz</div><div class="cal-dow">pt</div><div class="cal-dow">so</div><div class="cal-dow">nd</div>
+          <div></div><div></div><div></div><div></div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
+          <div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div>
+          <div class="cal-day">11</div><div class="cal-day range-start">12</div><div class="cal-day in-range">13</div><div class="cal-day in-range">14</div><div class="cal-day range-end">15</div><div class="cal-day">16</div><div class="cal-day">17</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-sub">Globalna wyszukiwarka — wyniki (<code class="k">.ns-result</code>)</div>
+    <div class="frame">
+      <a class="ns-result"><span class="ns-ic"><svg class="ic"><use href="#ic-target"/></svg></span><span class="ns-txt"><b>Konfigurator ras</b><span>Moduł</span></span></a>
+      <a class="ns-result"><span class="ns-ic"><svg class="ic"><use href="#ic-paw"/></svg></span><span class="ns-txt"><b>Border collie</b><span>Rasa</span></span></a>
+      <a class="ns-result"><span class="ns-ic"><svg class="ic"><use href="#ic-pin"/></svg></span><span class="ns-txt"><b>Wybieg Pole Mokotowskie</b><span>Miejsce</span></span></a>
+    </div>
+  </section>
+
+  <!-- KARTY -->
+  <section class="ds-sec" id="karty">
+    <h2><span class="n">J</span> Karty</h2>
+
+    <div class="ds-sub">Karta artykułu · karta kursu</div>
+    <div class="g2">
+      <a class="article-card"><div class="article-thumb"><img src="img/art-mieszkanie.jpg" alt=""><span class="tag">Wybór rasy</span></div><div class="article-body"><h3>Jak wybrać rasę do mieszkania</h3><p>Trzy rzeczy ważniejsze niż rozmiar psa.</p><span class="more">Czytaj <svg class="ic"><use href="#ic-arrow"/></svg></span></div></a>
+      <a class="course-card"><div class="course-cover"><img src="img/art-dzieci.jpg" alt=""><span class="lvl">Poziom podstawowy</span></div><div class="course-body"><h3>Pierwsze 30 dni ze szczeniakiem</h3><span class="course-author"><svg class="ic"><use href="#ic-user"/></svg> Marek Nowak</span><div class="course-meta"><span><svg class="ic"><use href="#ic-clock"/></svg> 3h 10min</span><span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> 4.8</span></div><div class="course-foot"><span class="price">149 zł</span><span class="btn btn-primary btn-sm">Zobacz kurs</span></div></div></a>
+    </div>
+
+    <div class="ds-sub">Karty listingu — miejsce · hodowca · specjalista</div>
+    <div class="frame" style="display:flex;flex-direction:column;gap:13px">
+      <div class="place"><div class="place-thumb"><svg class="ic ic-lg"><use href="#ic-paw"/></svg></div><div class="place-body"><div class="place-head"><div><div class="cat">Wybiegi</div><h3>Wybieg Pole Mokotowskie</h3></div><span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> Zweryfikowane</span></div><div class="meta"><span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> 4.7</span><span><svg class="ic"><use href="#ic-pin"/></svg> Ochota</span><span><svg class="ic"><use href="#ic-clock"/></svg> całodobowo</span></div><div class="note">Duży ogrodzony wybieg, 3 strefy wg wielkości psa.</div></div></div>
+      <div class="place breeder"><div class="breeder-thumb"><img src="img/dog-hero-border-collie.jpg" alt=""></div><div class="place-body"><div class="place-head"><div><div class="cat">Border collie</div><h3>Hodowla z Doliny Wisły</h3></div><span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> ZKwP/FCI</span></div><div class="meta"><span><svg class="ic"><use href="#ic-pin"/></svg> Warszawa</span><span class="litter avail">Dostępny miot</span></div><a class="btn btn-primary btn-sm contact">Zobacz profil</a></div></div>
+      <div class="place spec"><div class="spec-av">AK</div><div class="place-body"><div class="place-head"><div><div class="cat">Behawiorystka</div><h3>Anna Kowalska</h3></div><span class="method"><svg class="ic"><use href="#ic-heart"/></svg> Metody pozytywne</span></div><div class="spec-tags"><span class="tag-sm">Lęk separacyjny</span><span class="tag-sm">Agresja</span></div><div class="meta"><span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> 4.9</span><span><svg class="ic"><use href="#ic-pin"/></svg> Online · Warszawa</span><span class="price"><svg class="ic"><use href="#ic-chart"/></svg> od <b>180 zł</b></span></div></div></div>
+    </div>
+
+    <div class="ds-sub">Karta noclegu (styl Slowhop)</div>
+    <div style="max-width:360px">
+      <a class="place stay"><div class="stay-photo"><img src="img/art-hodowca.jpg" alt=""><span class="verified"><svg class="ic"><use href="#ic-verified"/></svg> Zweryfikowany</span><span class="stay-price">od 320 zł<small> /noc</small></span></div><div class="stay-body"><div class="stay-head"><h3>Chata pod Reglami</h3><span class="rating"><svg class="ic solid"><use href="#ic-star"/></svg> 4.9</span></div><div class="stay-region"><svg class="ic"><use href="#ic-pin"/></svg> Tatry · Zakopane</div><p class="stay-vibe">Drewniana chata z ogrodzonym ogrodem.</p><div class="stay-dog"><span class="dogchip"><svg class="ic"><use href="#ic-shield"/></svg> Ogrodzony teren</span><span class="dogchip"><svg class="ic"><use href="#ic-check"/></svg> Bez opłaty za psa</span></div></div></a>
+    </div>
+
+    <div class="ds-sub">Wejście hero · kafel „ścieżki życia"</div>
+    <div class="g2">
+      <a class="entry a" style="max-width:none"><span><b>Nie mam jeszcze psa</b><span>Dobierz rasę w konfiguratorze</span></span><svg class="ic ic-arrow"><use href="#ic-arrow"/></svg></a>
+      <div class="stage"><div class="stage-head"><div class="si"><svg class="ic ic-lg"><use href="#ic-compass"/></svg></div><h3>Wybór</h3></div><p>Zanim pojawi się pies — świadoma decyzja.</p><div class="links"><a><svg class="ic"><use href="#ic-arrow"/></svg> Konfigurator ras</a><a><svg class="ic"><use href="#ic-arrow"/></svg> Sprawdzeni hodowcy</a></div></div>
+    </div>
+  </section>
+
+  <!-- BLOKI TREŚCI -->
+  <section class="ds-sec" id="bloki">
+    <h2><span class="n">K</span> Bloki treści</h2>
+
+    <div class="ds-sub">Pasek zaufania (KPI) · tabela „w skrócie"</div>
+    <div class="trust" style="margin-bottom:20px"><div class="kpi"><div class="ic"><svg class="ic ic-lg"><use href="#ic-bone"/></svg></div><div class="n">50+</div><div class="l">ras w bazie</div></div><div class="kpi"><div class="ic"><svg class="ic ic-lg"><use href="#ic-pin"/></svg></div><div class="n">111</div><div class="l">miejsc w Warszawie</div></div><div class="kpi"><div class="ic"><svg class="ic ic-lg"><use href="#ic-verified"/></svg></div><div class="n">28</div><div class="l">zweryfikowanych noclegów</div></div></div>
+    <div class="quickfacts" style="max-width:420px"><div class="qf"><span class="k"><svg class="ic"><use href="#ic-bolt"/></svg> Energia</span><span class="qf-bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="qf"><span class="k"><svg class="ic"><use href="#ic-leaf"/></svg> Linienie</span><span class="qf-bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><div class="qf"><span class="k"><svg class="ic"><use href="#ic-paw"/></svg> Wielkość</span><b>Średnia</b></div></div>
+
+    <div class="ds-sub">CTA kontekstowe (glina / sosna)</div>
+    <div class="cta-inline"><div class="txt"><b>Nie wiesz, czy ta rasa pasuje?</b><span>Odpowiedz na kilka pytań.</span></div><a class="btn btn-primary">Sprawdź <svg class="ic"><use href="#ic-arrow"/></svg></a></div>
+    <div class="cta-inline pine"><div class="txt"><b>Szukasz sprawdzonego hodowcy?</b><span>Hodowle z weryfikacją ZKwP.</span></div><a class="btn btn-pine">Zobacz <svg class="ic"><use href="#ic-arrow"/></svg></a></div>
+
+    <div class="ds-sub">FAQ · opinia · byline autora</div>
+    <div class="g2">
+      <div class="faq"><details class="faq-item" open><summary>Czy test jest płatny?</summary><div class="faq-a">Nie — test i podgląd wyniku są bezpłatne.</div></details><details class="faq-item"><summary>Jak długo mam dostęp do kursu?</summary><div class="faq-a">Bezterminowo.</div></details></div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="review"><div class="review-top"><span class="av">MK</span><span class="rname"><b>Marta K.</b><span class="stars">★★★★★</span></span></div><p>Nasza suczka to skarb — zdrowa i świetnie ułożona.</p></div>
+        <div class="byline"><span class="av">KW</span><span class="bmeta"><b>Kaja Wiśniewska</b><span>Behawiorystka</span></span><span class="dot"></span><small><svg class="ic"><use href="#ic-clock"/></svg> 7 min czytania</small></div>
+      </div>
+    </div>
+
+    <div class="ds-sub">Info-list · checklist · postęp kursu</div>
+    <div class="g2">
+      <div class="frame"><div class="info-list"><div class="row"><span class="k"><svg class="ic"><use href="#ic-verified"/></svg> Związek</span><b>ZKwP / FCI</b></div><div class="row"><span class="k"><svg class="ic"><use href="#ic-shield"/></svg> Badania</span><b>CEA, HD/ED</b></div></div>
+        <ul class="checklist" style="margin-top:16px"><li><svg class="ic"><use href="#ic-check"/></svg> Komplet dokumentów i umowa</li><li><svg class="ic"><use href="#ic-check"/></svg> Wsparcie przez całe życie psa</li></ul>
+      </div>
+      <div class="mycourse"><img src="img/art-dzieci.jpg" alt=""><div class="mc-body"><b>Pierwsze 30 dni ze szczeniakiem</b><div class="pbar"><i style="width:45%"></i></div><div class="pmeta">Ukończono 6 z 13 lekcji</div></div><a class="btn btn-primary btn-sm">Kontynuuj</a></div>
+    </div>
+  </section>
+
+  <!-- KONFIGURATOR -->
+  <section class="ds-sec" id="konfigurator">
+    <h2><span class="n">L</span> Konfigurator</h2>
+    <div class="ds-sub">Pasek postępu · kafle odpowiedzi (<code class="k">.opt</code>)</div>
+    <div class="frame">
+      <div class="progress" style="margin-bottom:20px"><div class="progress-bar" style="width:45%"></div></div>
+      <div class="options c3">
+        <button class="opt selected"><span class="oi"><svg class="ic ic-lg"><use href="#ic-building"/></svg></span><b>Blok / mieszkanie</b></button>
+        <button class="opt"><span class="oi"><svg class="ic ic-lg"><use href="#ic-home"/></svg></span><b>Dom bez ogrodu</b></button>
+        <button class="opt"><span class="oi"><svg class="ic ic-lg"><use href="#ic-leaf"/></svg></span><b>Dom z ogrodem</b></button>
+      </div>
+    </div>
+    <div class="ds-sub">Soft-gate (wynik) · bezpiecznik antyporzuceniowy</div>
+    <div class="gate" style="margin-top:0;margin-bottom:20px"><span class="eyebrow">Zapisz wynik</span><h3>Wyślemy Ci pełny raport PDF</h3><p>Wynik widzisz już teraz. Zostaw e-mail po pełne uzasadnienie i listę hodowców.</p><form class="nl-form" onsubmit="return false"><input class="input" type="email" placeholder="Twój e-mail"><button class="btn btn-primary">Wyślij</button></form></div>
+    <div class="safeguard"><div class="warnmark"><svg class="ic ic-lg"><use href="#ic-shield"/></svg></div><h1 style="font-size:26px">Zatrzymajmy się na chwilę</h1><p>Zanim pokażemy rasy — zacznij od przygotowania.</p><div class="sg-actions"><a class="btn btn-primary"><svg class="ic"><use href="#ic-cap"/></svg> Kurs „Zanim kupisz psa"</a><button class="btn btn-outline">Pokaż mimo to</button></div></div>
+  </section>
+
+  <!-- KONTO -->
+  <section class="ds-sec" id="konto">
+    <h2><span class="n">M</span> Konto</h2>
+    <div class="ds-sub">Segment · profil psa</div>
+    <div class="frame">
+      <span class="seg" style="margin-bottom:16px"><button class="on">Mam psa</button><button>Szukam rasy</button></span>
+      <div class="dogp"><div class="dogp-top"><div class="dogp-av"><img src="img/dog-hero-border-collie.jpg" alt=""></div><div><b>Ziomek</b><span>Border collie · 2 lata</span></div></div><div class="dogp-form"><div class="form-row"><label>Imię psa</label><input class="input" value="Ziomek"></div><div class="form-row"><label>Waga</label><input class="input" value="18 kg"></div></div></div>
+    </div>
+    <div class="ds-sub">Logowanie bez hasła (fragment)</div>
+    <div class="frame" style="display:flex;justify-content:center">
+      <div style="max-width:340px;width:100%">
+        <button class="google-btn"><svg class="gicon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.28-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Kontynuuj z Google</button>
+        <div class="auth-divider">lub e-mailem</div>
+        <a class="btn btn-primary btn-block btn-lg">Wyślij link logowania</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANIZMY -->
+  <section class="ds-sec" id="organizmy" style="border-bottom:none">
+    <h2><span class="n">N</span> Organizmy (live)</h2>
+    <div class="ds-note">Pełne, interaktywne bloki najlepiej widać na żywo: <b>nawigacja + globalna wyszukiwarka</b>, <b>listing split lista+mapa</b> (Leaflet/OSM), <b>player kursu</b> i <b>galeria profilu</b>. Otwórz podstrony:
+      <div class="ds-toc" style="margin-top:14px">
+        <a href="index.html">Strona główna</a><a href="konfigurator.html">Konfigurator</a><a href="miejsca.html">Miejsca + mapa</a>
+        <a href="noclegi.html">Noclegi + kalendarz</a><a href="hodowca.html">Profil hodowcy</a><a href="kurs.html">Strona kursu</a><a href="panel.html">Panel konta</a>
+      </div>
+    </div>
+    <div class="ds-sub">Player kursu · lekcje z paywallem</div>
+    <div class="g2">
+      <div class="player" style="aspect-ratio:16/10"><span class="plabel"><svg class="ic"><use href="#ic-check"/></svg> Lekcja 1 — za darmo</span><img src="img/art-dzieci.jpg" alt=""><div class="play"><svg class="ic solid"><use href="#ic-bolt"/></svg></div></div>
+      <div class="module"><div class="module-head">Moduł 1 · Przygotowanie <span class="mmeta">3 lekcje</span></div><div class="lesson free"><span class="l-left"><svg class="ic solid"><use href="#ic-bolt"/></svg> Wyprawka <span class="free-badge">Za darmo</span></span><span class="time">12 min</span></div><div class="lesson locked"><span class="l-left"><svg class="ic"><use href="#ic-lock"/></svg> Bezpieczny dom</span><span class="time">9 min</span></div></div>
+    </div>
+  </section>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0"><span>© 2026 Psijaciel · Design System v1.0</span><span>Ciepły, stonowany — glina + sosna</span></div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
